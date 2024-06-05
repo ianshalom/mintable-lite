@@ -9,6 +9,7 @@ import {
   useSelectShuffledData,
   useSelectAllCollectionsData,
 } from "./lib/features/collections/collectionsSlice";
+import LoadingComponent from "./components/LoadingComponent";
 
 export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
@@ -20,6 +21,9 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
       dispatch(saveCollections(nftData));
     }
   }, [nftData, dispatch]);
+
+  if (!nftData || !shuffledNftCollection || !nftCollectionsByOwner)
+    return <LoadingComponent text="Loading..." />;
 
   return (
     <div className="w-full h-full">

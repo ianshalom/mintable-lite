@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import { getNftData } from "./api";
 import MarketPlace from "./MarketPlace";
-
+import LoadingComponent from "./components/LoadingComponent";
 export default async function Home() {
   const response = await getNftData();
   const data = response.map((collection: any) => {
@@ -19,8 +20,10 @@ export default async function Home() {
     return { name: collection.name, data: array, id: collection.id };
   });
   return (
-    <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
-      <MarketPlace nftData={data} />
-    </main>
+    <Suspense fallback={<LoadingComponent text="Loading..." />}>
+      <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
+        <MarketPlace nftData={data} />
+      </main>
+    </Suspense>
   );
 }
