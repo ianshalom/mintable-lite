@@ -45,8 +45,6 @@ export default function NFTDetailsPage({
     tokenType,
     lastUpdated,
   } = nftData;
-  console.log("collectionDataByOwner", collectionDataByOwner);
-  console.log("nftData", nftData);
 
   return (
     <div className="h-full flex flex-col">
