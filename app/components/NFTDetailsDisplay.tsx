@@ -8,7 +8,7 @@ import {
 } from "../lib/features/collections/collectionsSlice";
 import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
-import GeneralDisplay from "./NFTRowDisplay";
+import NFTRowDisplay from "./NFTRowDisplay";
 import Link from "next/link";
 
 export default function NFTDetailsPage({
@@ -45,6 +45,8 @@ export default function NFTDetailsPage({
     tokenType,
     lastUpdated,
   } = nftData;
+  console.log("collectionDataByOwner", collectionDataByOwner);
+  console.log("nftData", nftData);
 
   return (
     <div className="h-full flex flex-col">
@@ -96,7 +98,7 @@ export default function NFTDetailsPage({
         </div>
       </div>
       <div className="py-8">
-        <GeneralDisplay
+        <NFTRowDisplay
           key={collectionDataByOwner.id}
           slug={collectionDataByOwner.id}
           header="More from this collection"

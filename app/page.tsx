@@ -16,7 +16,7 @@ export default async function Home() {
         bannerImageUrl: nft.contractMetadata?.openSea.bannerImageUrl,
         externalUrl: nft.metadata?.external_url,
         twitterUsername: nft.contractMetadata?.openSea.twitterUsername,
-        id: nft.id.tokenId,
+        id: uuidv4(),
         lastUpdated: nft.timeLastUpdated,
         tokenType: nft.contractMetadata.tokenType,
         name: nft.metadata?.name,
