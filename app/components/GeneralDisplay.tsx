@@ -14,7 +14,14 @@ export default function GeneralDisplay({
 }) {
   const mappedNfts = nftData
     .map((collection) => {
-      return <NFTCard key={collection.name} collection={collection} />;
+      return (
+        <Link
+          key={collection.id}
+          href={`/collections/${slug}.mintable-lite.com/nft-details/${collection.id}`}
+        >
+          <NFTCard collection={collection} />
+        </Link>
+      );
     })
     .slice(0, 5);
 
