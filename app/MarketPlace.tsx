@@ -25,8 +25,6 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   if (!nftData || !uniqueNFTFromCollection || !nftCollectionsByOwner)
     return <LoadingComponent text="Loading..." />;
 
-  console.log("uniqueNFTFromCollection", uniqueNFTFromCollection);
-
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">

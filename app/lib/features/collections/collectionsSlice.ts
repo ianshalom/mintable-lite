@@ -22,7 +22,6 @@ export const collectionsSlice = createSlice({
   initialState,
   reducers: {
     saveCollections: (state, action: PayloadAction<CollectionsState[]>) => {
-      console.log("ACTION PAYLOAD: ", action.payload);
       state.data = action.payload;
     },
   },

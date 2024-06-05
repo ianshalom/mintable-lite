@@ -14,11 +14,11 @@ export default function NFTRowDisplay({
 }) {
   const mappedNfts = nftData
     .map((collection) => {
+      const hrefString = slug
+        ? `/collections/${slug}/nft-details/${collection.id}`
+        : `/collections/${collection.slug}`;
       return (
-        <Link
-          key={collection.id}
-          href={`/collections/${slug ? slug : collection.slug}`}
-        >
+        <Link key={collection.id} href={hrefString}>
           <NFTCard collection={collection} />
         </Link>
       );

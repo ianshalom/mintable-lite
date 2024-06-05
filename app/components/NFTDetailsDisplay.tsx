@@ -34,7 +34,6 @@ export default function NFTDetailsPage({
   if (!nftData || !collectionDataByOwner)
     return <LoadingComponent text="Loading..." />;
   const { name, image, collection, owner, description, price } = nftData;
-  console.log("collectionDataByOwner", collectionDataByOwner);
 
   return (
     <div className="h-full flex flex-col">
