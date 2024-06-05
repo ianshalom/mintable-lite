@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import TopNav from "./TopNav";
+import StoreProvider from "./StoreProvider";
+import { getNftData } from "./api";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -10,16 +13,20 @@ export const metadata: Metadata = {
     "A dynamic marketplace that allows users to explore, list, and trade Non-Fungible Tokens (NFTs)",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await getNftData();
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopNav />
-        {children}
+        <StoreProvider>
+          <TopNav />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
