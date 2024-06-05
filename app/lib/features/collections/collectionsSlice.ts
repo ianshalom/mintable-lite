@@ -40,7 +40,7 @@ export const useSelectCollectionsData = (state: RootState) => {
 
   const shuffledCollections = shuffleArrayFunc(
     combineCollections as NFTDataProps[]
-  ).slice(0, 10);
+  );
   return shuffledCollections;
 };
 

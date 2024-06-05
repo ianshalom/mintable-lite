@@ -24,9 +24,9 @@ const babyDogeUrl = `${baseURL}?contractAddress=${babyDogeAddress}&withMetadata=
 
 const nftAddresses = [
   { name: "Jake Inez", url: jakeInezUrl },
-  { name: "Women Unite", url: womenUniteUrl },
+  // { name: "Women Unite", url: womenUniteUrl },
   { name: "Schizo Poster", url: schizoPosterUrl },
-  { name: "Shrapnel Poster", url: shrapnelPosterUrl },
+  // { name: "Shrapnel Poster", url: shrapnelPosterUrl },
   { name: "Baby Doge", url: babyDogeUrl },
 ];
 
