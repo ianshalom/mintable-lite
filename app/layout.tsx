@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TopNav from "./TopNav";
 import StoreProvider from "./StoreProvider";
-import { getNftData } from "./api";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +17,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await getNftData();
-
   return (
     <html lang="en">
       <body className={inter.className}>

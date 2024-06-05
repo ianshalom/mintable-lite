@@ -8,5 +8,6 @@ export interface NFTDataProps {
 
 export interface CollectionsProps {
   name: string;
+  id: string;
   data: NFTDataProps[];
 }

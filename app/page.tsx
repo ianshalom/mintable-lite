@@ -16,11 +16,10 @@ export default async function Home() {
       return obj;
     });
 
-    return { name: collection.name, data: array };
+    return { name: collection.name, data: array, id: collection.id };
   });
   return (
     <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
-      <h1 className="font-bold text-xl">Mintable Lite Marketplace</h1>
       <MarketPlace nftData={data} />
     </main>
   );

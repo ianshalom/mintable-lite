@@ -28,7 +28,11 @@ export const collectionsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { saveCollections } = collectionsSlice.actions;
-export const useSelectCollectionsData = (state: RootState) => {
+
+export const useSelectAllCollectionsData = (state: RootState) =>
+  state.collections.data;
+
+export const useSelectShuffledData = (state: RootState) => {
   if (!state.collections.data) return [];
   const collections = state.collections.data?.map(
     (collection) => collection.data

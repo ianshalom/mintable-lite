@@ -23,17 +23,18 @@ const shrapnelPosterUrl = `${baseURL}?contractAddress=${shrapnelOperatorsCollect
 const babyDogeUrl = `${baseURL}?contractAddress=${babyDogeAddress}&withMetadata=${withMetadata}&limit=${limit}`;
 
 const nftAddresses = [
-  { name: "Jake Inez", url: jakeInezUrl },
+  { name: "Jake Inez", url: jakeInezUrl, id: "jakeinez" },
   // { name: "Women Unite", url: womenUniteUrl },
-  { name: "Schizo Poster", url: schizoPosterUrl },
+  { name: "Schizo Poster", url: schizoPosterUrl, id: "schizoposter" },
   // { name: "Shrapnel Poster", url: shrapnelPosterUrl },
-  { name: "Baby Doge", url: babyDogeUrl },
+  { name: "Baby Doge", url: babyDogeUrl, id: "babydoge" },
 ];
 
 export const getNftData = async () => {
   const results = await Promise.all(
-    nftAddresses.map(async ({ url, name }) => ({
+    nftAddresses.map(async ({ url, name, id }) => ({
       name,
+      id,
       data: (await axios.get(url)).data.nfts,
     }))
   );
