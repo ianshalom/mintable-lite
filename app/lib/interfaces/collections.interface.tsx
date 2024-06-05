@@ -1,14 +1,32 @@
 export interface NFTDataProps {
   id: string;
+  contractAddress: string;
+  collectionDescription: string;
+  collectionName: string;
+  bannerImageUrl: string;
+  lastUpdated: string;
+  tokenType: string;
+  twitterUsername: string;
+  externalUrl: string;
   name: string;
+  description: string;
   image: string;
-  collection: string;
   owner: string;
   price: number;
 }
 
+export interface OwnerMetadataProps {
+  contractAddress: string;
+  collectionDescription: string;
+  collectionName: string;
+  bannerImageUrl: string;
+  externalUrl: string;
+  twitterUsername: string;
+}
 export interface CollectionsProps {
   name: string;
-  id: string;
+  contractAddress: string;
+  ownerMetadata: OwnerMetadataProps;
   data: NFTDataProps[];
+  id: string;
 }

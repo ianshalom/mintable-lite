@@ -32,9 +32,7 @@ export default function GeneralDisplay({
           <p className="text-xl">{header}</p>
           <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
             {/** Appending .mintable-lite.com to simulate a subdomain for selected owner */}
-            <Link href={`/collections/${slug}.mintable-lite.com`}>
-              See more
-            </Link>
+            <Link href={`/collections/${slug}`}>See more</Link>
           </span>
         </div>
         <div className="h-full flex justify-between">

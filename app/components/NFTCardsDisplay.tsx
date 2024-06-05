@@ -7,11 +7,9 @@ import { useAppSelector } from "../lib/hooks";
 import Link from "next/link";
 
 export default function NFTCardsDisplay({ slug }: { slug: string }) {
-  const slugStr = slug.split(".")[0];
-
   const collectionByOwner = useAppSelector(
     useSelectCollectionByOwnerId({
-      payload: slugStr,
+      payload: slug,
       type: "useSelectCollectionByOwnerId",
     })
   );

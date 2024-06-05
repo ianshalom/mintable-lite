@@ -6,14 +6,13 @@ import NFTDetailsDisplay from "@/app/components/NFTDetailsDisplay";
 export default async function NFTDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string; slug: string };
 }) {
-  const { id } = params;
-
+  const { id, slug } = params;
   return (
     <Suspense fallback={<LoadingComponent text="Loading..." />}>
       <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
-        <NFTDetailsDisplay id={id} />
+        <NFTDetailsDisplay id={id} slug={slug} />
       </main>
     </Suspense>
   );

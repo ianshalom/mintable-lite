@@ -24,7 +24,6 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
 
   if (!nftData || !shuffledNftCollection || !nftCollectionsByOwner)
     return <LoadingComponent text="Loading..." />;
-
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">
@@ -34,9 +33,9 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
         />
       </div>
       <div className="py-8">
-        {nftCollectionsByOwner?.map((collection) => (
+        {nftCollectionsByOwner.map((collection) => (
           <GeneralDisplay
-            key={collection.id}
+            key={collection.contractAddress}
             slug={collection.id}
             header={collection.name}
             nftData={collection.data}
