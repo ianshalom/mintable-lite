@@ -17,7 +17,6 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">
-        <h2>General Randomized NFTs</h2>
         <GeneralDisplay />
       </div>
       <div className="py-8">
