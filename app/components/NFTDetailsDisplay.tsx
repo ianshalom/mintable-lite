@@ -8,7 +8,7 @@ import {
 } from "../lib/features/collections/collectionsSlice";
 import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
-import GeneralDisplay from "./GeneralDisplay";
+import GeneralDisplay from "./NFTRowDisplay";
 
 export default function NFTDetailsPage({
   id,

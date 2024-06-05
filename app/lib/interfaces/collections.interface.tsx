@@ -13,6 +13,7 @@ export interface NFTDataProps {
   image: string;
   owner: string;
   price: number;
+  slug: string;
 }
 
 export interface OwnerMetadataProps {

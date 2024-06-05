@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch } from "./lib/hooks";
 import { saveCollections } from "./lib/features/collections/collectionsSlice";
-import GeneralDisplay from "./components/GeneralDisplay";
+import NFTRowDisplay from "./components/NFTRowDisplay";
 import { useAppSelector } from "./lib/hooks";
 import {
   useSelectNFTOfEachCollection,
@@ -13,7 +13,7 @@ import LoadingComponent from "./components/LoadingComponent";
 
 export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
-  const shuffledNftCollection = useAppSelector(useSelectNFTOfEachCollection);
+  const uniqueNFTFromCollection = useAppSelector(useSelectNFTOfEachCollection);
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
 
   useEffect(() => {
@@ -22,16 +22,19 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
     }
   }, [nftData, dispatch]);
 
-  if (!nftData || !shuffledNftCollection || !nftCollectionsByOwner)
+  if (!nftData || !uniqueNFTFromCollection || !nftCollectionsByOwner)
     return <LoadingComponent text="Loading..." />;
+
+  console.log("uniqueNFTFromCollection", uniqueNFTFromCollection);
+
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">
-        <GeneralDisplay header="Collections" nftData={shuffledNftCollection} />
+        <NFTRowDisplay header="Collections" nftData={uniqueNFTFromCollection} />
       </div>
       <div className="py-8">
         {nftCollectionsByOwner.map((collection) => (
-          <GeneralDisplay
+          <NFTRowDisplay
             key={collection.contractAddress}
             slug={collection.id}
             header={collection.name}

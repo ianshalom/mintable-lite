@@ -24,6 +24,7 @@ export default async function Home() {
         description: nft.metadata?.description,
         price: Number(Math.random().toFixed(2)),
         owner: nft.contractMetadata?.name || nft.metadata?.created_by,
+        slug: collection.id,
       };
       return obj;
     });

@@ -3,7 +3,7 @@ import Link from "next/link";
 import NFTCard from "./NFTCard";
 import { NFTDataProps } from "../lib/interfaces/collections.interface";
 
-export default function GeneralDisplay({
+export default function NFTRowDisplay({
   nftData,
   header,
   slug,
@@ -17,7 +17,7 @@ export default function GeneralDisplay({
       return (
         <Link
           key={collection.id}
-          href={`/collections/${slug}.mintable-lite.com/nft-details/${collection.id}`}
+          href={`/collections/${slug ? slug : collection.slug}`}
         >
           <NFTCard collection={collection} />
         </Link>
@@ -30,10 +30,11 @@ export default function GeneralDisplay({
       <div className="flex flex-col w-full">
         <div className="flex justify-between items-center font-bold mb-4">
           <p className="text-xl">{header}</p>
-          <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
-            {/** Appending .mintable-lite.com to simulate a subdomain for selected owner */}
-            <Link href={`/collections/${slug}`}>See more</Link>
-          </span>
+          {slug && (
+            <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
+              <Link href={`/collections/${slug}`}>See more</Link>
+            </span>
+          )}
         </div>
         <div className="h-full flex justify-between">
           {mappedNfts.length && mappedNfts}
