@@ -1,4 +1,5 @@
 export interface NFTDataProps {
+  id: string;
   name: string;
   image: string;
   collection: string;

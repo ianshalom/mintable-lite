@@ -2,11 +2,14 @@ import { Suspense } from "react";
 import { getNftData } from "./api";
 import MarketPlace from "./MarketPlace";
 import LoadingComponent from "./components/LoadingComponent";
+import { v4 as uuidv4 } from "uuid";
+
 export default async function Home() {
   const response = await getNftData();
   const data = response.map((collection: any) => {
     const array = collection.data.map((nft: any) => {
       const obj = {
+        id: uuidv4(),
         name: nft.metadata?.name,
         image: nft.metadata?.image || nft.metadata?.image_url,
         description: nft.metadata?.description,

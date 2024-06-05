@@ -1,7 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import NFTCard from "./NFTCard";
 import { NFTDataProps } from "../lib/interfaces/collections.interface";
-import Link from "next/link";
 
 export default function GeneralDisplay({
   nftData,

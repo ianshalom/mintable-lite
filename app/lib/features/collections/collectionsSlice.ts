@@ -35,11 +35,24 @@ export const useSelectAllCollectionsData = (state: RootState) =>
 
 export const useSelectCollectionByOwnerId =
   (action: PayloadAction<string>) => (state: RootState) => {
-    const data = state.collections.data?.filter((data) => {
-      return data.id === action.payload;
-    })[0];
+    const data = state.collections.data?.filter(
+      (data) => data.id === action.payload
+    )[0];
 
     return data;
+  };
+
+export const useSelectNFTInfoById =
+  (action: PayloadAction<string>) => (state: RootState) => {
+    let filteredData;
+    const data = state.collections.data?.filter((data) =>
+      data.data.filter((nft) => {
+        if (nft.id === action.payload) {
+          return (filteredData = nft);
+        }
+      })
+    );
+    return filteredData;
   };
 
 export const useSelectShuffledData = (state: RootState) => {
