@@ -6,6 +6,7 @@ import {
   NFTDataProps,
 } from "../../interfaces/collections.interface";
 import { shuffleArrayFunc } from "../../utils/helpers";
+
 type CollectionsState = CollectionsProps;
 
 interface initialStateProps {
@@ -31,6 +32,15 @@ export const { saveCollections } = collectionsSlice.actions;
 
 export const useSelectAllCollectionsData = (state: RootState) =>
   state.collections.data;
+
+export const useSelectCollectionByOwnerId =
+  (action: PayloadAction<string>) => (state: RootState) => {
+    const data = state.collections.data?.filter((data) => {
+      return data.id === action.payload;
+    })[0];
+
+    return data;
+  };
 
 export const useSelectShuffledData = (state: RootState) => {
   if (!state.collections.data) return [];

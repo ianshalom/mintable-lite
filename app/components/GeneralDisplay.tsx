@@ -1,6 +1,4 @@
 import React from "react";
-import { useAppSelector } from "../lib/hooks";
-import { useSelectShuffledData } from "../lib/features/collections/collectionsSlice";
 import NFTCard from "./NFTCard";
 import { NFTDataProps } from "../lib/interfaces/collections.interface";
 import Link from "next/link";
@@ -29,7 +27,10 @@ export default function GeneralDisplay({
           <div className="flex justify-between items-center font-bold mb-4">
             <p className="text-xl">{header}</p>
             <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
-              <Link href={`/collections/${slug}.com`}>See more</Link>
+              {/** Appending .mintable-lite.com to simulate a subdomain for selected owner */}
+              <Link href={`/collections/${slug}.mintable-lite.com`}>
+                See more
+              </Link>
             </span>
           </div>
           <div className="h-full flex justify-between">
