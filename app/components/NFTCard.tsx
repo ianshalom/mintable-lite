@@ -18,9 +18,9 @@ export default function NFTCard({ collection }: { collection: NFTDataProps }) {
           />
         </div>
         <div className="p-4">
-          <p className="font-bold text-md mb-4">{name}</p>
-          <p className="font-bold text-md mb-4">{price} ETH</p>
-          <p className="text-xs text-gray-400">By {owner}</p>
+          <p className="font-bold text-md mb-2">{name}</p>
+          <p className="text-xs text-gray-400 mb-4">By {owner}</p>
+          <p className="font-bold text-md text-blue-600/100">{price} ETH</p>
         </div>
       </div>
     </div>
