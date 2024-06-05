@@ -56,20 +56,18 @@ export const useSelectNFTInfoById =
     return filteredData;
   };
 
-export const useSelectShuffledData = (state: RootState) => {
+export const useSelectNFTOfEachCollection = (state: RootState) => {
   if (!state.collections.data) return [];
-  const collections = state.collections.data?.map(
-    (collection) => collection.data
+
+  const collections = state.collections.data?.map((collection) =>
+    collection.data.filter((nft, i) => i === 0 && collection.data[i])
   );
   const combineCollections = collections?.reduce(
     (result, array) => result.concat(array),
     []
   );
 
-  const shuffledCollections = shuffleArrayFunc(
-    combineCollections as NFTDataProps[]
-  );
-  return shuffledCollections;
+  return combineCollections;
 };
 
 export default collectionsSlice.reducer;

@@ -6,14 +6,14 @@ import { saveCollections } from "./lib/features/collections/collectionsSlice";
 import GeneralDisplay from "./components/GeneralDisplay";
 import { useAppSelector } from "./lib/hooks";
 import {
-  useSelectShuffledData,
+  useSelectNFTOfEachCollection,
   useSelectAllCollectionsData,
 } from "./lib/features/collections/collectionsSlice";
 import LoadingComponent from "./components/LoadingComponent";
 
 export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
-  const shuffledNftCollection = useAppSelector(useSelectShuffledData);
+  const shuffledNftCollection = useAppSelector(useSelectNFTOfEachCollection);
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
 
   useEffect(() => {
@@ -27,10 +27,7 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">
-        <GeneralDisplay
-          header="All collections"
-          nftData={shuffledNftCollection}
-        />
+        <GeneralDisplay header="Collections" nftData={shuffledNftCollection} />
       </div>
       <div className="py-8">
         {nftCollectionsByOwner.map((collection) => (
