@@ -24,10 +24,18 @@ export interface OwnerMetadataProps {
   externalUrl: string;
   twitterUsername: string;
 }
+
+export interface PromoDataProps {
+  description: string;
+  imageUrl: string;
+  cta: string;
+  altText: string;
+}
 export interface CollectionsProps {
   name: string;
   contractAddress: string;
   ownerMetadata: OwnerMetadataProps;
   data: NFTDataProps[];
   id: string;
+  promoData: PromoDataProps;
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { PROMO_MOCK_DATA } from "./mockData";
 // Alchemy API key
 const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 // Alchemy URL
@@ -23,18 +23,34 @@ const shrapnelPosterUrl = `${baseURL}?contractAddress=${shrapnelOperatorsCollect
 const babyDogeUrl = `${baseURL}?contractAddress=${babyDogeAddress}&withMetadata=${withMetadata}&limit=${limit}`;
 
 const nftAddresses = [
-  { name: "Jake Inez", url: jakeInezUrl, id: "jakeinez" },
+  {
+    name: "Jake Inez",
+    url: jakeInezUrl,
+    id: "jakeinez",
+    promoData: PROMO_MOCK_DATA.JAKE_INEZ,
+  },
   // { name: "Women Unite", url: womenUniteUrl },
-  { name: "Schizo Poster", url: schizoPosterUrl, id: "schizoposter" },
+  {
+    name: "Schizo Poster",
+    url: schizoPosterUrl,
+    id: "schizoposter",
+    promoData: PROMO_MOCK_DATA.SCHIZO_POSTER,
+  },
   // { name: "Shrapnel Poster", url: shrapnelPosterUrl },
-  { name: "Baby Doge", url: babyDogeUrl, id: "babydoge" },
+  {
+    name: "Baby Doge",
+    url: babyDogeUrl,
+    id: "babydoge",
+    promoData: PROMO_MOCK_DATA.BABY_DOGE,
+  },
 ];
 
 export const getNftData = async () => {
   const results = await Promise.all(
-    nftAddresses.map(async ({ url, name, id }) => ({
+    nftAddresses.map(async ({ url, name, id, promoData }) => ({
       name,
       id,
+      promoData,
       data: (await axios.get(url)).data.nfts,
     }))
   );

@@ -10,6 +10,7 @@ import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
 import NFTRowDisplay from "./NFTRowDisplay";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 export default function NFTDetailsPage({
   id,
@@ -47,42 +48,66 @@ export default function NFTDetailsPage({
   } = nftData;
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col">
       <div className="flex mb-8">
-        <div className="shrink mr-12 aspect-square rounded-xl shadow-lg hover:shadow-xl">
-          <div className="aspect-square rounded-xl overflow-hidden">
-            <Image
-              alt={owner}
-              src={image}
-              height={200}
-              width={800}
-              className="object-cover"
-            />
-          </div>
+        <div className="mr-12 rounded-xl hover:shadow-xl">
+          <Image
+            alt={owner}
+            src={image}
+            height={200}
+            width={800}
+            className="rounded-md"
+          />
         </div>
         <div className="w-full flex flex-col justify-between">
-          <div>
-            <p className="mb-4">{collection}</p>
-            <p className="font-bold text-xl mb-6">{name}</p>
+          <div className="mb-4">
+            <p className="font-bold text-4xl mb-6">{name}</p>
             <p className="mb-4">
-              Owned by{" "}
+              By{" "}
               <span className="underline text-blue-400">
                 <Link href={`/collections/${collectionDataByOwner.id}`}>
                   {owner}
                 </Link>
               </span>
             </p>
-            <p className="mb-4">Description: {description}</p>
+            <i>{description}</i>
+          </div>
+          <div className="mb-4">
+            <p className="font-bold text-lg">
+              <span className="text-blue-400">{price}</span> ETH
+            </p>
+            <button className="bg-sky-500 hover:bg-sky-600 px-12 py-2 rounded-full mt-4 text-white text-lg ">
+              <span>Buy</span>
+            </button>
+          </div>
+          <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
+            <div className="w-1/2 mr-14 flex flex-col justify-between">
+              <div>
+                <p className="font-bold text-red-400 text-lg">Special offer!</p>
+                <p>{collectionDataByOwner.promoData.description}</p>
+              </div>
+              <p className="text-sm mb-4">
+                {parse(collectionDataByOwner.promoData.cta)}
+              </p>
+            </div>
+            <div className="h-full w-1/2 flex items-center">
+              <Image
+                alt={collectionDataByOwner.promoData.altText}
+                src={collectionDataByOwner.promoData.imageUrl}
+                height={100}
+                width={150}
+                className="object-cover rounded-md"
+              />
+            </div>
           </div>
           <div>
             <p className="font-bold">Details</p>
-            <div className="flex justify-between mb-4">
-              <div>
+            <div className="flex mb-4">
+              <div className="w-1/2 mr-8">
                 <p>Contract Address</p>
                 <p>Token ID</p>
                 <p>Token Standard</p>
                 <p>Last Updated</p>
-                <p></p>
               </div>
               <div>
                 <p>{contractAddress}</p>
@@ -92,7 +117,6 @@ export default function NFTDetailsPage({
               </div>
             </div>
           </div>
-          <div className="w-full h-[150px] bg-gray-100 rounded-md border-2"></div>
         </div>
       </div>
       <div className="py-8">

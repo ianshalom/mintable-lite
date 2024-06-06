@@ -1,11 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
-import {
-  CollectionsProps,
-  NFTDataProps,
-} from "../../interfaces/collections.interface";
-import { shuffleArrayFunc } from "../../utils/helpers";
+import { CollectionsProps } from "../../interfaces/collections.interface";
 
 type CollectionsState = CollectionsProps;
 

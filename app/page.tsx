@@ -43,6 +43,7 @@ export default async function Home() {
       contractAddress: array[0].contractAddress,
       ownerMetadata: userMetadata,
       id: collection.id,
+      promoData: collection.promoData,
     };
   });
 

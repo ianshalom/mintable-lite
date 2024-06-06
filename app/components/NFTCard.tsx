@@ -6,7 +6,7 @@ export default function NFTCard({ collection }: { collection: NFTDataProps }) {
   const { name, price, owner, image } = collection;
 
   return (
-    <div className="shrink mr-2 mb-8 aspect-square rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl">
+    <div className="shrink mr-2 last:mr-none mb-8 aspect-square rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl">
       <div>
         <div className="aspect-square rounded-t-xl overflow-hidden">
           <Image
