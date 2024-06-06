@@ -1,5 +1,6 @@
 import axios from "axios";
 import { PROMO_MOCK_DATA } from "./mockData";
+import { ContractInfoForUserModeProps } from "../lib/interfaces/collections.interface";
 // Alchemy API key
 const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 // Alchemy URL
@@ -54,8 +55,10 @@ export const getNftData = async () => {
   return results;
 };
 
-export const getNftDataOfUser = async (contractAddress: string) => {
-  const url = `${baseURL}?contractAddress=${contractAddress}&withMetadata=${withMetadata}&limit=${limit}`;
+export const getNftDataOfUser = async (info: ContractInfoForUserModeProps) => {
+  const { id, name, contractAddress } = info;
+  const url = `${baseURL}?contractAddress=${contractAddress}&withMetadata=${withMetadata}&limit=8`;
   const response = await axios.get(url);
-  console.log("NFT DATA OF USERL ", response);
+  const nftData = [{ data: response.data.nfts, id, name, contractAddress }];
+  return nftData;
 };

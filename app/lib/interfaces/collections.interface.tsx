@@ -1,3 +1,5 @@
+export type TransactionStatusProps = "Listed" | "Sold" | "Not Listed";
+
 export interface NFTDataProps {
   id: string;
   contractAddress: string;
@@ -14,6 +16,7 @@ export interface NFTDataProps {
   owner: string;
   price: number;
   slug: string;
+  transactionStatus: TransactionStatusProps;
 }
 
 export interface OwnerMetadataProps {
@@ -23,6 +26,12 @@ export interface OwnerMetadataProps {
   bannerImageUrl: string;
   externalUrl: string;
   twitterUsername: string;
+}
+
+export interface ContractInfoForUserModeProps {
+  name: string;
+  id: string;
+  contractAddress: string;
 }
 
 export interface PromoDataProps {

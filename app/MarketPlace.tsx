@@ -17,14 +17,14 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
 
   useEffect(() => {
+    if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
     if (nftData) {
       dispatch(saveCollections(nftData));
     }
-  }, [nftData, dispatch]);
+  }, [nftData, dispatch, uniqueNFTFromCollection, nftCollectionsByOwner]);
 
   if (!nftData || !uniqueNFTFromCollection || !nftCollectionsByOwner)
     return <LoadingComponent text="Loading..." />;
-
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">

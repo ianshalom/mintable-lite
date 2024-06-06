@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CollectionsReducer from "./features/collections/collectionsSlice";
+import UserSlice from "./features/user/userSlice";
 export const makeStore = () => {
   return configureStore({
     reducer: {
       collections: CollectionsReducer,
+      user: UserSlice,
     },
   });
 };

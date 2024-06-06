@@ -4,18 +4,24 @@ import React, { useState, useEffect } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { contractAddressesForUserMode } from "../lib/constants";
 import { getNftDataOfUser } from "../api";
+import { ContractInfoForUserModeProps } from "../lib/interfaces/collections.interface";
+import { formatNFTResponse } from "../lib/utils/helpers";
+import { useAppDispatch } from "../lib/hooks";
+import { saveUserNFTData } from "../lib/features/user/userSlice";
+import { useRouter } from "next/navigation";
 
 export default function Modal({
   setShowModal,
 }: {
   setShowModal: (status: boolean) => void;
 }) {
-  const fetchDataHandler = async (contractAddress: string) => {
-    const response = await getNftDataOfUser(contractAddress);
-    // After getting response, set store
-    // Redirect to user dashboard
-    // Display data
-    console.log("RESPONSE: ", response);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const fetchDataHandler = async (info: ContractInfoForUserModeProps) => {
+    const response = await getNftDataOfUser(info);
+    const nftData = formatNFTResponse(response, "Not Listed");
+    dispatch(saveUserNFTData(nftData));
+    router.push("/dashboard");
   };
 
   return (
@@ -50,7 +56,7 @@ export default function Modal({
                     type="button"
                     onClick={() => {
                       setShowModal(false);
-                      fetchDataHandler(info.contractAddress);
+                      fetchDataHandler(info);
                     }}
                   >
                     Connect to {info.name}

@@ -18,14 +18,16 @@ export const collectionsSlice = createSlice({
   initialState,
   reducers: {
     saveCollections: (state, action: PayloadAction<CollectionsState[]>) => {
-      console.log("ACTION PAYLOAD: ", action.payload);
       state.data = action.payload;
+    },
+    addCollection: (state, action: PayloadAction<CollectionsState>): void => {
+      state.data?.push(action.payload);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { saveCollections } = collectionsSlice.actions;
+export const { saveCollections, addCollection } = collectionsSlice.actions;
 
 export const useSelectAllCollectionsData = (state: RootState) =>
   state.collections.data;

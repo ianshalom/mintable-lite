@@ -1,4 +1,7 @@
-import { NFTDataProps } from "../interfaces/collections.interface";
+import {
+  NFTDataProps,
+  TransactionStatusProps,
+} from "../interfaces/collections.interface";
 import { v4 as uuidv4 } from "uuid";
 
 export const shuffleArrayFunc = (array: NFTDataProps[]) => {
@@ -9,7 +12,10 @@ export const shuffleArrayFunc = (array: NFTDataProps[]) => {
   return array;
 };
 
-export const formatNFTResponse = (nftCollection: any) => {
+export const formatNFTResponse = (
+  nftCollection: any,
+  transactionStatus?: TransactionStatusProps
+) => {
   const data = nftCollection.map((collection: any) => {
     const array = collection.data.map((nft: any) => {
       const obj = {
@@ -25,7 +31,9 @@ export const formatNFTResponse = (nftCollection: any) => {
         name: nft.metadata?.name,
         image: nft.metadata?.image || nft.metadata?.image_url,
         description: nft.metadata?.description,
-        price: Number(Math.random().toFixed(2)),
+        transactionStatus: transactionStatus ? transactionStatus : "Listed",
+        price:
+          Math.floor(Math.random() * (5 * 100 - 1 * 100) + 1 * 100) / (1 * 100),
         owner: nft.contractMetadata?.name || nft.metadata?.created_by,
         slug: collection.id,
       };
@@ -46,7 +54,7 @@ export const formatNFTResponse = (nftCollection: any) => {
       contractAddress: array[0].contractAddress,
       ownerMetadata: userMetadata,
       id: collection.id,
-      promoData: collection.promoData,
+      promoData: collection?.promoData,
     };
   });
   return data;

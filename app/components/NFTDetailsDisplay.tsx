@@ -80,26 +80,31 @@ export default function NFTDetailsPage({
               <span>Buy</span>
             </button>
           </div>
-          <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
-            <div className="w-1/2 mr-14 flex flex-col justify-between">
-              <div>
-                <p className="font-bold text-red-400 text-lg">Special offer!</p>
-                <p>{collectionDataByOwner.promoData.description}</p>
+          {collectionDataByOwner.promoData && (
+            <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
+              <div className="w-1/2 mr-14 flex flex-col justify-between">
+                <div>
+                  <p className="font-bold text-red-400 text-lg">
+                    Special offer!
+                  </p>
+                  <p>{collectionDataByOwner.promoData.description}</p>
+                </div>
+                <p className="text-sm mb-4">
+                  {parse(collectionDataByOwner.promoData.cta)}
+                </p>
               </div>
-              <p className="text-sm mb-4">
-                {parse(collectionDataByOwner.promoData.cta)}
-              </p>
+              <div className="h-full w-1/2 flex items-center">
+                <Image
+                  alt={collectionDataByOwner.promoData.altText}
+                  src={collectionDataByOwner.promoData.imageUrl}
+                  height={100}
+                  width={150}
+                  className="object-cover rounded-md"
+                />
+              </div>
             </div>
-            <div className="h-full w-1/2 flex items-center">
-              <Image
-                alt={collectionDataByOwner.promoData.altText}
-                src={collectionDataByOwner.promoData.imageUrl}
-                height={100}
-                width={150}
-                className="object-cover rounded-md"
-              />
-            </div>
-          </div>
+          )}
+
           <div>
             <p className="font-bold">Details</p>
             <div className="flex mb-4">
