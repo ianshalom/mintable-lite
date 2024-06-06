@@ -7,22 +7,17 @@ const baseURL = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTsForCo
 
 // Get contract addresses of multiple nft owners for generating real nfts
 const jakeInezAddress = "0x7b0500fdc298e7f3a26d4cfab87606779680b7db";
-const womanUniteAddress = "0xbee7cb80dfd21a9eaae714208f361601f68eb746";
 const schizoPosterAddress = "0xbfe47d6d4090940d1c7a0066b63d23875e3e2ac5";
-const shrapnelOperatorsCollectionAddress =
-  "0xfc8a98c22a9e32948ab028414d67c62c49b16864";
 const babyDogeAddress = "0xd9f092bdf2b6eaf303fc09cc952e94253ae32fae";
 
 const withMetadata = "true";
 const limit = 30;
 
 const jakeInezUrl = `${baseURL}?contractAddress=${jakeInezAddress}&withMetadata=${withMetadata}&limit=${limit}`;
-const womenUniteUrl = `${baseURL}?contractAddress=${womanUniteAddress}&withMetadata=${withMetadata}&limit=${limit}`;
 const schizoPosterUrl = `${baseURL}?contractAddress=${schizoPosterAddress}&withMetadata=${withMetadata}&limit=${limit}`;
-const shrapnelPosterUrl = `${baseURL}?contractAddress=${shrapnelOperatorsCollectionAddress}&withMetadata=${withMetadata}&limit=${limit}`;
 const babyDogeUrl = `${baseURL}?contractAddress=${babyDogeAddress}&withMetadata=${withMetadata}&limit=${limit}`;
 
-const nftAddresses = [
+const nftAddressesForMarketPlace = [
   {
     name: "Jake Inez",
     url: jakeInezUrl,
@@ -48,7 +43,7 @@ const nftAddresses = [
 // For fetching real NFTs to populate in marketplace.
 export const getNftData = async () => {
   const results = await Promise.all(
-    nftAddresses.map(async ({ url, name, id, promoData }) => ({
+    nftAddressesForMarketPlace.map(async ({ url, name, id, promoData }) => ({
       name,
       id,
       promoData,
@@ -57,4 +52,10 @@ export const getNftData = async () => {
   );
 
   return results;
+};
+
+export const getNftDataOfUser = async (contractAddress: string) => {
+  const url = `${baseURL}?contractAddress=${contractAddress}&withMetadata=${withMetadata}&limit=${limit}`;
+  const response = await axios.get(url);
+  console.log("NFT DATA OF USERL ", response);
 };

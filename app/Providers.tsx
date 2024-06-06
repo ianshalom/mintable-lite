@@ -8,14 +8,8 @@ import {
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-
 import { WagmiProvider } from "wagmi";
-// import {
-//   argentWallet,
-//   trustWallet,
-//   ledgerWallet,
-// } from "@rainbow-me/rainbowkit/wallets";
-import { mainnet, polygon, optimism, arbitrum, base } from "wagmi/chains";
+import { mainnet } from "wagmi/chains";
 
 const config = getDefaultConfig({
   appName: "Mintable Lite",

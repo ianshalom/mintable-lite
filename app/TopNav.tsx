@@ -4,13 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+import Modal from "./components/Modal";
 
 export default function TopNav() {
+  const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<InstanceType<typeof HTMLElement | any>>(null);
-  const { address } = useAccount();
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (
@@ -53,14 +53,25 @@ export default function TopNav() {
             >
               Log in
             </Link>
+
+            <div className="mx-4">
+              <button
+                className="bg-blue-400 text-white active:bg-blue-500 
+      font-bold px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                type="button"
+                onClick={() => setShowModal(true)}
+              >
+                Connect Wallet
+              </button>
+              {showModal ? <Modal setShowModal={setShowModal} /> : null}
+            </div>
+
             <div>
               <span onClick={toggleDropdown}>
                 <FaUser size={25} />
               </span>
             </div>
-            <span className="ml-4">
-              <ConnectButton />
-            </span>
+
             {isOpen && (
               <div
                 className={`absolute top-16 mt-2 w-48 rounded-md shadow-lg bg-white`}
