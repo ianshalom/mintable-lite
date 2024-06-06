@@ -3,10 +3,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+
 export default function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<InstanceType<typeof HTMLElement | any>>(null);
+  const { address } = useAccount();
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (
@@ -54,6 +58,9 @@ export default function TopNav() {
                 <FaUser size={25} />
               </span>
             </div>
+            <span className="ml-4">
+              <ConnectButton />
+            </span>
             {isOpen && (
               <div
                 className={`absolute top-16 mt-2 w-48 rounded-md shadow-lg bg-white`}

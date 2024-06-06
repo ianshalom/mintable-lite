@@ -45,6 +45,7 @@ const nftAddresses = [
   },
 ];
 
+// For fetching real NFTs to populate in marketplace.
 export const getNftData = async () => {
   const results = await Promise.all(
     nftAddresses.map(async ({ url, name, id, promoData }) => ({
