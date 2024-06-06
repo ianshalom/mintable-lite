@@ -11,7 +11,7 @@ export default function TopNav() {
           </Link>
           <Link
             className="border-2 border-black rounded-md py-1 px-4 hover:bg-gray-100 flex items-center justify-center"
-            href="/"
+            href="/auth"
           >
             Log in
           </Link>
