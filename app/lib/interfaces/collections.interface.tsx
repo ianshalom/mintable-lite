@@ -37,5 +37,5 @@ export interface CollectionsProps {
   ownerMetadata: OwnerMetadataProps;
   data: NFTDataProps[];
   id: string;
-  promoData: PromoDataProps;
+  promoData?: PromoDataProps;
 }
