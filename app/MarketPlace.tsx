@@ -28,7 +28,11 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   return (
     <div className="w-full h-full">
       <div className="py-8 w-full h-full">
-        <NFTRowDisplay header="Collections" nftData={uniqueNFTFromCollection} />
+        <NFTRowDisplay
+          header="Collections"
+          nftData={uniqueNFTFromCollection}
+          displayCollection
+        />
       </div>
       <div className="py-8">
         {nftCollectionsByOwner.map((collection) => (

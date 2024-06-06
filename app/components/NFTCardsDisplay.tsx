@@ -55,10 +55,7 @@ export default function NFTCardsDisplay({ slug }: { slug: string }) {
       </div>
       <div className="h-full flex flex-wrap justify-between">
         {data.map((collection) => (
-          <Link
-            key={collection.name}
-            href={`${slug}/nft-details/${collection.id}`}
-          >
+          <Link key={collection.name} href={`/assets/${collection.id}`}>
             <NFTCard collection={collection} />
           </Link>
         ))}

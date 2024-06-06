@@ -4,7 +4,7 @@ import React from "react";
 import { useAppSelector } from "../lib/hooks";
 import {
   useSelectNFTInfoById,
-  useSelectCollectionByOwnerId,
+  useSelectCollectionByNFTContractAddress,
 } from "../lib/features/collections/collectionsSlice";
 import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
@@ -22,14 +22,13 @@ export default function NFTDetailsPage({
   const nftData = useAppSelector(
     useSelectNFTInfoById({
       payload: id,
-      type: "useSelectCollectionByOwnerId",
+      type: "useSelectNFTInfoById",
     })
   );
-
   const collectionDataByOwner = useAppSelector(
-    useSelectCollectionByOwnerId({
-      payload: slug,
-      type: "useSelectCollectionByOwnerId",
+    useSelectCollectionByNFTContractAddress({
+      payload: id,
+      type: "useSelectCollectionByNFTContractAddress",
     })
   );
 

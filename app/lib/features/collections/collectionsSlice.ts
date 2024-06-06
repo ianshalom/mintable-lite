@@ -32,6 +32,15 @@ export const { saveCollections, addCollection } = collectionsSlice.actions;
 export const useSelectAllCollectionsData = (state: RootState) =>
   state.collections.data;
 
+export const useSelectCollectionByNFTContractAddress =
+  (action: PayloadAction<string>) => (state: RootState) => {
+    const data = state.collections.data?.filter((data) =>
+      data.data.find((nft) => nft.id === action.payload)
+    )[0];
+
+    return data;
+  };
+
 export const useSelectCollectionByOwnerId =
   (action: PayloadAction<string>) => (state: RootState) => {
     const data = state.collections.data?.filter(
