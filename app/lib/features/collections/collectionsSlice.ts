@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { CollectionsProps } from "../../interfaces/collections.interface";
@@ -20,8 +20,17 @@ export const collectionsSlice = createSlice({
     saveCollections: (state, action: PayloadAction<CollectionsState[]>) => {
       state.data = action.payload;
     },
-    addCollection: (state, action: PayloadAction<CollectionsState>): void => {
-      state.data?.push(action.payload);
+    addCollection: (state, action: PayloadAction<CollectionsState>) => {
+      const collection = state.data?.find(
+        (collection) =>
+          collection.contractAddress === action.payload.contractAddress
+      );
+
+      if (collection) {
+        collection.data.push(...action.payload.data);
+      } else {
+        state.data?.push(action.payload);
+      }
     },
   },
 });
