@@ -28,7 +28,7 @@ export default function UserDashboardPage() {
 
   if (!address) {
     return (
-      <div className="flex flex-col mx-auto items-center">
+      <div className="flex flex-col items-center">
         <p className="py-6 text-xl font-bold">
           Sorry, you are currently not connected to your wallet. To view your
           wallet, please connect to your wallet.

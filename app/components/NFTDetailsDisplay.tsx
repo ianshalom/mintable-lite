@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../lib/hooks";
 import {
   useSelectNFTInfoById,
@@ -34,6 +34,10 @@ export default function NFTDetailsPage({ id }: { id: string }) {
 
     setShowModal(true);
   };
+
+  useEffect(() => {
+    if (address || session.data) return setError("");
+  }, [session.data, address]);
 
   const nftData = useAppSelector(
     useSelectNFTInfoById({

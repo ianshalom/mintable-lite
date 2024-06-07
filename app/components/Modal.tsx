@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { contractAddressesForUserMode } from "../lib/constants";
 import { getNftDataOfUser } from "../lib/api";
@@ -16,6 +16,7 @@ export default function Modal({
 }: {
   setShowModal: (status: boolean) => void;
 }) {
+  const [isLoading, setIsLoading] = useState(false);
   const { address } = useAccount();
 
   const dispatch = useAppDispatch();
@@ -24,8 +25,10 @@ export default function Modal({
   const fetchDataHandler = async (info: ContractInfoForUserModeProps) => {
     const response = await getNftDataOfUser(info);
     const nftData = formatNFTResponse(response, "Not Listed");
+    setShowModal(false);
+
     dispatch(saveUserNFTData(nftData));
-    router.push("/dashboard");
+    // router.push("/dashboard");
   };
 
   return (
@@ -68,14 +71,15 @@ export default function Modal({
                     return (
                       <button
                         key={info.id}
-                        className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-2.5 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none ml-4 ease-linear transition-all duration-150"
+                        className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-2.5 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none ml-4 ease-linear transition-all duration-150 disabled:bg-gray-400"
                         type="button"
+                        disabled={isLoading}
                         onClick={() => {
-                          setShowModal(false);
+                          setIsLoading(true);
                           fetchDataHandler(info);
                         }}
                       >
-                        Connect to {info.name}
+                        {isLoading ? "Loading..." : `Connect to ${info.name}`}
                       </button>
                     );
                   })}

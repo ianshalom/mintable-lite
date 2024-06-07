@@ -91,7 +91,6 @@ export default function TopNav() {
                   type="button"
                   onClick={() => {
                     disconnect();
-                    router.push("/");
                   }}
                 >
                   Disconnect Wallet
