@@ -33,24 +33,29 @@ export default function Modal({
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative my-6 mx-auto max-w-3xl">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <div className="flex items-center justify-between p-5 border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-xl font-semibold">Connect to a wallet</h3>
-              <button
-                className=" text-black font-bold uppercase px-6 py-3 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
-                onClick={() => setShowModal(false)}
-              >
-                x
-              </button>
+            <div className="flex items-center justify-center p-8 border-solid border-blueGray-200 rounded-t">
+              <h3 className="text-3xl font-semibold text-center">
+                Connect to a wallet
+              </h3>
+              {!address && (
+                <button
+                  className="absolute right-0 text-black font-bold uppercase px-6 py-3 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
+                  onClick={() => setShowModal(false)}
+                >
+                  x
+                </button>
+              )}
             </div>
-            <div className="relative p-6 flex-auto">
+            <div className="relative p-6 flex-auto text-center">
               {!address ? (
                 <p className="text-black text-md">
                   Connect to wallet to show Metamask integration.
                 </p>
               ) : (
                 <p className="text-black text-md">
-                  You have successfully connected to Metamask. Select creator to
-                  generate real NFTs to include in your wallet.
+                  Congratulations! You have successfully connected to Metamask.
+                  Select a creator to generate real NFTs to include in your
+                  wallet.
                 </p>
               )}
             </div>

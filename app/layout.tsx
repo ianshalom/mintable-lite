@@ -4,6 +4,10 @@ import "./globals.css";
 import TopNav from "./TopNav";
 import StoreProvider from "./StoreProvider";
 import Providers from "./Providers";
+import SessionProvider from "./SessionProvider";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/options";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,15 +21,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
-          <StoreProvider>
-            <TopNav />
-            {children}
-          </StoreProvider>
-        </Providers>
+        <SessionProvider session={session as any}>
+          <Providers>
+            <StoreProvider>
+              <TopNav />
+              {children}
+            </StoreProvider>
+          </Providers>
+        </SessionProvider>
       </body>
     </html>
   );

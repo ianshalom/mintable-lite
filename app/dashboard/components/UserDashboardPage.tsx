@@ -29,9 +29,9 @@ export default function UserDashboardPage() {
   if (!address) {
     return (
       <div className="flex flex-col mx-auto items-center">
-        <p className="py-6 semi-bold">
-          Sorry, you are currently not connected to your wallet. Please connect
-          to your wallet.
+        <p className="py-6 text-xl font-bold">
+          Sorry, you are currently not connected to your wallet. To view your
+          wallet, please connect to your wallet.
         </p>
       </div>
     );
