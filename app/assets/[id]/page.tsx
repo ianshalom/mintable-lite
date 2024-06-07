@@ -8,11 +8,11 @@ export default async function NFTDetailsPage({
 }: {
   params: { id: string; slug: string };
 }) {
-  const { id, slug } = params;
+  const { id } = params;
   return (
     <Suspense fallback={<LoadingComponent text="Loading..." />}>
       <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
-        <NFTDetailsDisplay id={id} slug={slug} />
+        <NFTDetailsDisplay id={id} />
       </main>
     </Suspense>
   );

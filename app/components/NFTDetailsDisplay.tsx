@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "../lib/hooks";
 import {
   useSelectNFTInfoById,
@@ -11,14 +11,30 @@ import LoadingComponent from "./LoadingComponent";
 import NFTRowDisplay from "./NFTRowDisplay";
 import Link from "next/link";
 import parse from "html-react-parser";
+import { useSession } from "next-auth/react";
+import { useAccount } from "wagmi";
+import PurchaseNFTModal from "./PurchaseNFTModal";
 
-export default function NFTDetailsPage({
-  id,
-  slug,
-}: {
-  id: string;
-  slug: string;
-}) {
+export default function NFTDetailsPage({ id }: { id: string }) {
+  const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const session = useSession();
+  const { address } = useAccount();
+
+  const buyHandler = () => {
+    if (!session.data)
+      return setError(
+        "You need to be signed in and connected to your wallet before you can make a purchase."
+      );
+
+    if (!address)
+      return setError(
+        "You need to be connected to your wallet before you can make a purchase."
+      );
+
+    setShowModal(true);
+  };
+
   const nftData = useAppSelector(
     useSelectNFTInfoById({
       payload: id,
@@ -75,9 +91,13 @@ export default function NFTDetailsPage({
             <p className="font-bold text-lg">
               <span className="text-blue-400">{price}</span> ETH
             </p>
-            <button className="bg-sky-500 hover:bg-sky-600 px-12 py-2 rounded-full mt-4 text-white text-lg ">
+            <button
+              className="bg-sky-500 hover:bg-sky-600 px-12 py-2 rounded-full mt-4 text-white text-lg"
+              onClick={buyHandler}
+            >
               <span>Buy</span>
             </button>
+            {error && <p className="text-red-400 mt-2">{error}</p>}
           </div>
           {collectionDataByOwner.promoData && (
             <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
@@ -131,6 +151,9 @@ export default function NFTDetailsPage({
           nftData={collectionDataByOwner.data}
         />
       </div>
+      {showModal && (
+        <PurchaseNFTModal setShowModal={setShowModal} selectedNFT={nftData} />
+      )}
     </div>
   );
 }

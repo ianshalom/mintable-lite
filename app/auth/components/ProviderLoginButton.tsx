@@ -3,8 +3,6 @@
 import React from "react";
 import { signIn } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function ProviderLoginButton({
   id,
@@ -13,9 +11,6 @@ export default function ProviderLoginButton({
   id: string;
   name: string;
 }) {
-  const router = useRouter();
-  const session = useSession();
-
   const getLogo = () => {
     switch (id) {
       case "github":

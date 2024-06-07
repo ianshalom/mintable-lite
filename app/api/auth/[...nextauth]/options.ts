@@ -3,7 +3,6 @@ import GithubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
   providers: [
     GithubProvider({
       clientId: process.env.NEXT_PUBLIC_GITHUB_ID as string,
@@ -15,22 +14,16 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    signIn: async ({
-      account,
-    }: {
-      account: any;
-      profile?: any;
-      token?: any;
-    }) => {
+    signIn: async ({ account }: { account: any }) => {
       return { ...account };
     },
-    jwt: async ({ token, account, user }: any) => {
+    jwt: async ({ token, account, user }) => {
       return { ...token, ...account, ...user };
     },
-    session: async ({ session, token }: { token: any; session: any }) => {
+    session: async ({ session, token }) => {
       session.user = {
         ...session.user,
-        image: token.avatar_url,
+        image: token.avatar_url as string,
       };
       return session;
     },

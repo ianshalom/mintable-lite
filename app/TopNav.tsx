@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import { useAccount, useDisconnect } from "wagmi";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function TopNav() {
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,7 @@ export default function TopNav() {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const session = useSession();
-
+  const router = useRouter();
   const handleOutsideClick = (event: MouseEvent) => {
     if (
       buttonRef.current &&
@@ -86,9 +87,12 @@ export default function TopNav() {
               <span className="mx-6">
                 <button
                   className="bg-gray-400 text-white active:bg-gray-500 
-      font-bold px-6 py-1 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+      font-bold px-6 py-1 rounded-md shadow hover:shadow-lg outline-none focus:outline-none"
                   type="button"
-                  onClick={() => disconnect()}
+                  onClick={() => {
+                    disconnect();
+                    router.push("/");
+                  }}
                 >
                   Disconnect Wallet
                 </button>
