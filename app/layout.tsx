@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import TopNav from "./TopNav";
 import StoreProvider from "./StoreProvider";
 import Providers from "./Providers";
 import SessionProvider from "./SessionProvider";
@@ -28,10 +27,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <SessionProvider session={session as any}>
           <Providers>
-            <StoreProvider>
-              <TopNav />
-              {children}
-            </StoreProvider>
+            <StoreProvider>{children}</StoreProvider>
           </Providers>
         </SessionProvider>
       </body>
