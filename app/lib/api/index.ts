@@ -1,6 +1,6 @@
 import axios from "axios";
 import { PROMO_MOCK_DATA } from "./mockData";
-import { ContractInfoForUserModeProps } from "../lib/interfaces/collections.interface";
+import { ContractInfoForUserModeProps } from "../interfaces/collections.interface";
 // Alchemy API key
 const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 // Alchemy URL

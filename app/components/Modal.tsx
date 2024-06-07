@@ -3,7 +3,7 @@
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { contractAddressesForUserMode } from "../lib/constants";
-import { getNftDataOfUser } from "../api";
+import { getNftDataOfUser } from "../lib/api";
 import { ContractInfoForUserModeProps } from "../lib/interfaces/collections.interface";
 import { formatNFTResponse } from "../lib/utils/helpers";
 import { useAppDispatch } from "../lib/hooks";

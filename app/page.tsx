@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getNftData } from "./api";
+import { getNftData } from "./lib/api";
 import MarketPlace from "./MarketPlace";
 import LoadingComponent from "./components/LoadingComponent";
 import { v4 as uuidv4 } from "uuid";
