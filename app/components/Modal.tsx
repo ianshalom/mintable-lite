@@ -9,14 +9,18 @@ import { formatNFTResponse } from "../lib/utils/helpers";
 import { useAppDispatch } from "../lib/hooks";
 import { saveUserNFTData } from "../lib/features/user/userSlice";
 import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
 
 export default function Modal({
   setShowModal,
 }: {
   setShowModal: (status: boolean) => void;
 }) {
+  const { address } = useAccount();
+
   const dispatch = useAppDispatch();
   const router = useRouter();
+
   const fetchDataHandler = async (info: ContractInfoForUserModeProps) => {
     const response = await getNftDataOfUser(info);
     const nftData = formatNFTResponse(response, "Not Listed");
@@ -39,30 +43,39 @@ export default function Modal({
               </button>
             </div>
             <div className="relative p-6 flex-auto">
-              <p className="text-black text-md">
-                Feel free to connect to your own wallet to view your own NFTs by
-                clicking on &#34;Connect Wallet&#34;. For the purpose of this
-                demo, I will simulate connecting to my &#34;own&#34; wallet by
-                connecting to an existing one with available NFTs.
-              </p>
+              {!address ? (
+                <p className="text-black text-md">
+                  Connect to wallet to show Metamask integration.
+                </p>
+              ) : (
+                <p className="text-black text-md">
+                  You have successfully connected to Metamask. Select creator to
+                  generate real NFTs to include in your wallet.
+                </p>
+              )}
             </div>
             <div className="flex items-center justify-center p-6 border-solid border-blueGray-200 rounded-b">
-              <ConnectButton />
-              {contractAddressesForUserMode.map((info) => {
-                return (
-                  <button
-                    key={info.id}
-                    className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-2.5 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none ml-4 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => {
-                      setShowModal(false);
-                      fetchDataHandler(info);
-                    }}
-                  >
-                    Connect to {info.name}
-                  </button>
-                );
-              })}
+              {!address ? (
+                <ConnectButton />
+              ) : (
+                <>
+                  {contractAddressesForUserMode.map((info) => {
+                    return (
+                      <button
+                        key={info.id}
+                        className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-2.5 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none ml-4 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => {
+                          setShowModal(false);
+                          fetchDataHandler(info);
+                        }}
+                      >
+                        Connect to {info.name}
+                      </button>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </div>
         </div>

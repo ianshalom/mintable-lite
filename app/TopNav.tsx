@@ -3,15 +3,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Modal from "./components/Modal";
+import { useAccount, useDisconnect } from "wagmi";
 
 export default function TopNav() {
   const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<InstanceType<typeof HTMLElement | any>>(null);
-
+  const { address } = useAccount();
+  const { disconnect } = useDisconnect();
   const handleOutsideClick = (event: MouseEvent) => {
     if (
       buttonRef.current &&
@@ -55,23 +56,33 @@ export default function TopNav() {
             </Link>
 
             <div className="mx-4">
-              <button
-                className="bg-blue-400 text-white active:bg-blue-500 
+              {address ? (
+                <button
+                  className="bg-gray-400 text-white active:bg-gray-500 
       font-bold px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={() => setShowModal(true)}
-              >
-                Connect Wallet
-              </button>
+                  type="button"
+                  onClick={() => disconnect()}
+                >
+                  Disconnect Wallet
+                </button>
+              ) : (
+                <button
+                  className="bg-blue-400 text-white active:bg-blue-500 
+      font-bold px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                  type="button"
+                  onClick={() => setShowModal(true)}
+                >
+                  Connect Wallet
+                </button>
+              )}
+
               {showModal ? <Modal setShowModal={setShowModal} /> : null}
             </div>
-
             <div>
               <span onClick={toggleDropdown}>
                 <FaUser size={25} />
               </span>
             </div>
-
             {isOpen && (
               <div
                 className={`absolute top-16 mt-2 w-48 rounded-md shadow-lg bg-white`}
