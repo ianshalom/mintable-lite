@@ -31,22 +31,22 @@ export default function NFTCardsDisplay({ slug }: { slug: string }) {
           quality={100}
         />
       </div>
-      <div className="flex justify-between">
+      <div className="flex">
         <div className="w-1/2 h-32">
           <p className="truncate ... mb-4">
             {ownerMetadata.collectionDescription}
           </p>
-          <p className="">
+          <p className="mb-4">
             Items: <span className="font-bold">{data.length}</span>
           </p>
-        </div>
-        <div>
-          <a
-            href={`https://twitter.com/${ownerMetadata.twitterUsername}`}
-            target="_blank"
-          >
-            <FaTwitter size={20} />
-          </a>
+          <span>
+            <a
+              href={`https://twitter.com/${ownerMetadata.twitterUsername}`}
+              target="_blank"
+            >
+              <FaTwitter size={20} />
+            </a>
+          </span>
         </div>
       </div>
 

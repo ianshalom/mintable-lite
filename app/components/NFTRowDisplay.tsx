@@ -21,7 +21,7 @@ export default function NFTRowDisplay({
         : `/assets/${collection.id}`;
 
       return (
-        <Link key={collection.id} href={hrefString}>
+        <Link key={collection.id} href={hrefString} className="">
           <NFTCard collection={collection} />
         </Link>
       );

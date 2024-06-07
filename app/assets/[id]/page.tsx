@@ -11,7 +11,7 @@ export default async function NFTDetailsPage({
   const { id } = params;
   return (
     <Suspense fallback={<LoadingComponent text="Loading..." />}>
-      <main className="flex w-full px-6 md:p-0 md:w-4/6 mx-auto flex-col mt-24">
+      <main className="flex w-full px-6 md:p-0 mx-auto flex-col">
         <NFTDetailsDisplay id={id} />
       </main>
     </Suspense>

@@ -12,15 +12,15 @@ export default function NFTCard({
   const { name, price, owner, image } = collection;
 
   return (
-    <div className="mr-2 mb-8 aspect-square rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl">
+    <div className="mr-2 mb-8 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl">
       <div>
         <div className="aspect-square rounded-t-xl overflow-hidden">
           <Image
             alt={owner}
             src={image}
             height={140}
-            width={320}
-            className="object-cover hover:scale-110 duration-500"
+            width={200}
+            className="hover:scale-110 duration-500"
           />
         </div>
         <div className="p-4">

@@ -64,17 +64,11 @@ export default function NFTDetailsPage({ id }: { id: string }) {
 
   return (
     <div className="flex flex-col">
-      <div className="flex mb-8">
-        <div className="mr-12 rounded-xl hover:shadow-xl">
-          <Image
-            alt={owner}
-            src={image}
-            height={200}
-            width={800}
-            className="rounded-md"
-          />
+      <div className="flex justify-between md:justify-normal mb-8">
+        <div className="relative h-96 w-96 mr-12 rounded-xl">
+          <Image alt={owner} src={image} fill className="rounded-md " />
         </div>
-        <div className="w-full flex flex-col justify-between">
+        <div className="w-1/2 flex flex-col justify-between">
           <div className="mb-4">
             <p className="font-bold text-4xl mb-6">{name}</p>
             <p className="mb-4">
@@ -87,7 +81,7 @@ export default function NFTDetailsPage({ id }: { id: string }) {
             </p>
             <i>{description}</i>
           </div>
-          <div className="mb-4">
+          <div>
             <p className="font-bold text-lg">
               <span className="text-blue-400">{price}</span> ETH
             </p>
@@ -99,50 +93,52 @@ export default function NFTDetailsPage({ id }: { id: string }) {
             </button>
             {error && <p className="text-red-400 mt-2">{error}</p>}
           </div>
-          {collectionDataByOwner.promoData && (
-            <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
-              <div className="w-1/2 mr-14 flex flex-col justify-between">
-                <div>
-                  <p className="font-bold text-red-400 text-lg">
-                    Special offer!
-                  </p>
-                  <p>{collectionDataByOwner.promoData.description}</p>
-                </div>
-                <p className="text-sm mb-4">
-                  {parse(collectionDataByOwner.promoData.cta)}
-                </p>
-              </div>
-              <div className="h-full w-1/2 flex items-center">
-                <Image
-                  alt={collectionDataByOwner.promoData.altText}
-                  src={collectionDataByOwner.promoData.imageUrl}
-                  height={100}
-                  width={150}
-                  className="object-cover rounded-md"
-                />
-              </div>
-            </div>
-          )}
+        </div>
+      </div>
 
-          <div>
-            <p className="font-bold">Details</p>
-            <div className="flex mb-4">
-              <div className="w-1/2 mr-8">
-                <p>Contract Address</p>
-                <p>Token ID</p>
-                <p>Token Standard</p>
-                <p>Last Updated</p>
-              </div>
-              <div>
-                <p>{contractAddress}</p>
-                <p>{nftData["id"]}</p>
-                <p>{tokenType}</p>
-                <p>{lastUpdated}</p>
-              </div>
+      <div className="flex flex-col justify-between">
+        <div className="flex flex-col mb-4">
+          <p className="font-bold">Details</p>
+          <div className="flex justify-between md:justify-normal mb-4">
+            <div className="w-96 mr-12">
+              <p className="text-sm">Address</p>
+              <p className="text-sm">Token ID</p>
+              <p className="text-sm">Token Standard</p>
+              <p className="text-sm">Last Updated</p>
+            </div>
+            <div className="">
+              <p className="text-sm">{contractAddress}</p>
+              <p className="text-sm">{nftData["id"]}</p>
+              <p className="text-sm">{tokenType}</p>
+              <p className="text-sm">{lastUpdated}</p>
             </div>
           </div>
         </div>
+
+        {collectionDataByOwner.promoData && (
+          <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
+            <div className="w-1/2 mr-14 flex flex-col justify-between">
+              <div>
+                <p className="font-bold text-red-400 text-lg">Special offer!</p>
+                <p>{collectionDataByOwner.promoData.description}</p>
+              </div>
+              <p className="text-sm mb-4">
+                {parse(collectionDataByOwner.promoData.cta)}
+              </p>
+            </div>
+            <div className="h-full w-1/2 flex items-center">
+              <Image
+                alt={collectionDataByOwner.promoData.altText}
+                src={collectionDataByOwner.promoData.imageUrl}
+                height={100}
+                width={150}
+                className="object-cover rounded-md"
+              />
+            </div>
+          </div>
+        )}
       </div>
+
       <div className="py-8">
         <NFTRowDisplay
           key={collectionDataByOwner.id}

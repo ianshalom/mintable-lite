@@ -6,7 +6,7 @@ import Providers from "./Providers";
 import SessionProvider from "./SessionProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/options";
-
+import ClientLayoutWrapper from "./ClientLayoutWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,7 +27,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <SessionProvider session={session as any}>
           <Providers>
-            <StoreProvider>{children}</StoreProvider>
+            <StoreProvider>
+              <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+            </StoreProvider>
           </Providers>
         </SessionProvider>
       </body>
