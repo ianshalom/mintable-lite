@@ -16,7 +16,6 @@ import { CollectionsProps } from "@/app/lib/interfaces/collections.interface";
 
 export default function UserDashboardPage() {
   const [showModal, setShowModal] = useState(false);
-  const [showConnectWalletModal, setShowConnectWalletModal] = useState(false);
 
   const [selectedNFT, setSelectedNFT] = useState<NFTDataProps | null>(null);
   const dispatch = useAppDispatch();
