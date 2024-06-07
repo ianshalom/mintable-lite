@@ -51,7 +51,7 @@ export default function TopNav() {
         <div className="flex justify-between items-center">
           <div>
             <Link href="/">
-              <p>MintableLite</p>
+              <p>Mintable Lite</p>
             </Link>
           </div>
           <div className="flex items-center">

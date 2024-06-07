@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useAppDispatch } from "./lib/hooks";
 import { saveCollections } from "./lib/features/collections/collectionsSlice";
 import NFTRowDisplay from "./components/NFTRowDisplay";

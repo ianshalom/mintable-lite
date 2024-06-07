@@ -15,7 +15,7 @@ export default async function LoginPage() {
 
   return (
     <div className="mt-24">
-      <p className="text-2xl font-semibold mb-8">Log in to MintableLite</p>
+      <p className="text-2xl font-semibold mb-8">Log in to Mintable Lite</p>
       {providersMap.map((provider) => {
         return (
           <>
