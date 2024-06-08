@@ -2,6 +2,7 @@ import NFTCardsDisplay from "@/app/components/NFTCardsDisplay";
 import { Suspense } from "react";
 import LoadingComponent from "@/app/components/LoadingComponent";
 import { getNFTCollectionBySlug } from "@/app/lib/api";
+import NFTCollectionMetadataApi from "../../lib/api/NFTCollectionMetadata/NFTCollectionMetadata";
 
 export default async function CollectionsPage({
   params,
@@ -9,7 +10,10 @@ export default async function CollectionsPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const collectionData = await getNFTCollectionBySlug(slug);
+  const nftCollectionMetaApi = new NFTCollectionMetadataApi();
+  const collectionData = await nftCollectionMetaApi.getNFTCollectionBySlug(
+    slug
+  );
 
   return (
     <Suspense fallback={<LoadingComponent text="Loading..." />}>

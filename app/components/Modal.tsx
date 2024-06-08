@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { contractAddressesForUserMode } from "../lib/constants";
-import { getNftDataOfUser } from "../lib/api";
 import { ContractInfoForUserModeProps } from "../lib/interfaces/collections.interface";
 import { formatNFTResponse } from "../lib/utils/helpers";
 import { useAppDispatch } from "../lib/hooks";
@@ -11,6 +10,8 @@ import { saveUserNFTData } from "../lib/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import { usePathname } from "next/navigation";
+import NFTCollectionApi from "../lib/api/NFTCollection/NFTCollection";
+
 export default function Modal({
   setShowModal,
 }: {
@@ -24,7 +25,8 @@ export default function Modal({
   const pathname = usePathname();
 
   const fetchDataHandler = async (info: ContractInfoForUserModeProps) => {
-    const response = await getNftDataOfUser(info);
+    const nftCollectionApi = new NFTCollectionApi();
+    const response = await nftCollectionApi.getNftDataOfUser(info);
     const nftData = formatNFTResponse(response, "Not Listed");
     setShowModal(false);
 

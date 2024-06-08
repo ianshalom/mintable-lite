@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import LoadingComponent from "@/app/components/LoadingComponent";
 import NFTDetailsDisplay from "@/app/components/NFTDetailsDisplay";
-import { getNFTMetaData } from "@/app/lib/api";
+import NFTMetadataApi from "@/app/lib/api/NFTMetadata/NFTMetadata";
 
 export default async function NFTDetailsPage({
   params,
@@ -11,7 +11,9 @@ export default async function NFTDetailsPage({
 }) {
   const { slug } = params;
   const [contractAddress, id] = slug;
-  const nftMetadata = await getNFTMetaData(contractAddress, id);
+
+  const metadataApi = new NFTMetadataApi();
+  const nftMetadata = await metadataApi.getNFTMetaData(contractAddress, id);
 
   return (
     <Suspense fallback={<LoadingComponent text="Loading..." />}>
