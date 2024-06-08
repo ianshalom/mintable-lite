@@ -1,7 +1,6 @@
 import NFTCardsDisplay from "@/app/components/NFTCardsDisplay";
 import { Suspense } from "react";
 import LoadingComponent from "@/app/components/LoadingComponent";
-import { getNFTCollectionBySlug } from "@/app/lib/api";
 import NFTCollectionMetadataApi from "../../lib/api/NFTCollectionMetadata/NFTCollectionMetadata";
 
 export default async function CollectionsPage({
