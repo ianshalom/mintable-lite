@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../lib/hooks";
 import {
-  useSelectNFTInfoById,
   useSelectCollectionByNFTContractAddress,
+  useSelectNFTMetaAndPromoData,
 } from "../lib/features/collections/collectionsSlice";
 import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
@@ -14,8 +14,18 @@ import parse from "html-react-parser";
 import { useSession } from "next-auth/react";
 import { useAccount } from "wagmi";
 import PurchaseNFTModal from "./PurchaseNFTModal";
+import { NFTMetadataProps } from "@/app/lib/interfaces/collections.interface";
+import { FaTwitter } from "react-icons/fa";
 
-export default function NFTDetailsPage({ id }: { id: string }) {
+export default function NFTDetailsPage({
+  id,
+  nftMetadata,
+  contractAddress,
+}: {
+  id: string;
+  nftMetadata: NFTMetadataProps;
+  contractAddress: string;
+}) {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const session = useSession();
@@ -39,38 +49,42 @@ export default function NFTDetailsPage({ id }: { id: string }) {
     if (address || session.data) return setError("");
   }, [session.data, address]);
 
-  const nftData = useAppSelector(
-    useSelectNFTInfoById({
-      payload: id,
-      type: "useSelectNFTInfoById",
-    })
-  );
-  const collectionDataByOwner = useAppSelector(
-    useSelectCollectionByNFTContractAddress({
-      payload: id,
-      type: "useSelectCollectionByNFTContractAddress",
+  const additionalNFTData = useAppSelector(
+    useSelectNFTMetaAndPromoData({
+      payload: { contractAddress, id },
+      type: "useSelectNFTMetaAndPromoData",
     })
   );
 
-  if (!nftData || !collectionDataByOwner)
+  const collectionDataByOwner = useAppSelector(
+    useSelectCollectionByNFTContractAddress({
+      payload: contractAddress,
+      type: "useSelectCollectionByNFTContractAddress",
+    })
+  );
+  const { name, image, created_by, description } = nftMetadata;
+  if (!additionalNFTData || !collectionDataByOwner)
     return <LoadingComponent text="Loading..." />;
+
   const {
-    name,
-    image,
-    collection,
     owner,
-    description,
     price,
-    contractAddress,
-    tokenType,
+    slug,
     lastUpdated,
-  } = nftData;
+    tokenType,
+    description: promoDescription,
+    cta,
+    imageUrl,
+    altText,
+    collectionName,
+    twitterUsername,
+  } = additionalNFTData;
 
   return (
     <div className="flex flex-col">
       <div className="flex justify-between md:justify-normal mb-8">
         <div className="relative h-96 w-96 mr-12 rounded-xl">
-          <Image alt={owner} src={image} fill className="rounded-md " />
+          <Image alt={created_by} src={image} fill className="rounded-md " />
         </div>
         <div className="w-1/2 flex flex-col justify-between">
           <div className="mb-4">
@@ -78,9 +92,15 @@ export default function NFTDetailsPage({ id }: { id: string }) {
             <p className="mb-4">
               By{" "}
               <span className="underline text-blue-400">
-                <Link href={`/collections/${collectionDataByOwner.id}`}>
-                  {owner}
-                </Link>
+                <Link href={`/collections/${slug}`}>{owner}</Link>
+              </span>
+              <span className="my-4">
+                <a
+                  href={`https://twitter.com/${twitterUsername}`}
+                  target="_blank"
+                >
+                  <FaTwitter size={20} />
+                </a>
               </span>
             </p>
             <i>{description}</i>
@@ -112,47 +132,50 @@ export default function NFTDetailsPage({ id }: { id: string }) {
             </div>
             <div className="">
               <p className="text-sm">{contractAddress}</p>
-              <p className="text-sm">{nftData["id"]}</p>
+              <p className="text-sm">{id}</p>
               <p className="text-sm">{tokenType}</p>
               <p className="text-sm">{lastUpdated}</p>
             </div>
           </div>
         </div>
 
-        {collectionDataByOwner.promoData && (
-          <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
-            <div className="w-1/2 mr-14 flex flex-col justify-between">
-              <div>
-                <p className="font-bold text-red-400 text-lg">Special offer!</p>
-                <p>{collectionDataByOwner.promoData.description}</p>
-              </div>
-              <p className="text-sm mb-4">
-                {parse(collectionDataByOwner.promoData.cta)}
-              </p>
+        <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
+          <div className="w-1/2 mr-14 flex flex-col justify-between">
+            <div>
+              <p className="font-bold text-red-400 text-lg">Special offer!</p>
+              <p>{promoDescription}</p>
             </div>
-            <div className="h-full w-1/2 flex items-center">
-              <Image
-                alt={collectionDataByOwner.promoData.altText}
-                src={collectionDataByOwner.promoData.imageUrl}
-                height={100}
-                width={150}
-                className="object-cover rounded-md"
-              />
-            </div>
+            <p className="text-sm mb-4">{cta && parse(cta)}</p>
           </div>
-        )}
+          <div className="h-full w-1/2 flex items-center">
+            <Image
+              alt={altText ?? ""}
+              src={imageUrl ?? ""}
+              height={100}
+              width={150}
+              className="object-cover rounded-md"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="py-8">
         <NFTRowDisplay
           key={collectionDataByOwner.id}
-          slug={collectionDataByOwner.id}
+          slug={slug}
           header="More from this collection"
           nftData={collectionDataByOwner.data}
         />
       </div>
       {showModal && (
-        <PurchaseNFTModal setShowModal={setShowModal} selectedNFT={nftData} />
+        <PurchaseNFTModal
+          setShowModal={setShowModal}
+          image={image}
+          collectionName={collectionName}
+          createdBy={created_by}
+          name={name}
+          price={price}
+        />
       )}
     </div>
   );
