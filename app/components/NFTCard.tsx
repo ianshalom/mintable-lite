@@ -5,9 +5,11 @@ import { NFTDataProps } from "../lib/interfaces/collections.interface";
 export default function NFTCard({
   collection,
   hidePrice,
+  displayCollection,
 }: {
   collection: NFTDataProps;
   hidePrice?: boolean;
+  displayCollection?: boolean;
 }) {
   const { name, price, owner, image } = collection;
 
@@ -26,14 +28,16 @@ export default function NFTCard({
         <div className="p-4">
           <p className="font-bold text-md mb-2">{name}</p>
           <p className="text-xs text-gray-400 mb-4">By {owner}</p>
-          {!hidePrice && (
+          {!hidePrice && !displayCollection && (
             <p className="font-bold text-md text-blue-600/100">{price} ETH</p>
           )}
-          {hidePrice && collection.transactionStatus === "Listed" && (
-            <p className="font-bold text-sm text-blue-600/100">
-              Listed for {price} ETH
-            </p>
-          )}
+          {hidePrice &&
+            collection.transactionStatus === "Listed" &&
+            !displayCollection && (
+              <p className="font-bold text-sm text-blue-600/100">
+                Listed for {price} ETH
+              </p>
+            )}
         </div>
       </div>
     </div>
