@@ -20,6 +20,6 @@ export const PROMO_MOCK_DATA = {
     imageUrl:
       "https://support.bitmart.com/hc/article_attachments/15699070890011",
     cta: 'Visit our<a href="https://babydogenft.com/" className="underline text-blue-400" target="_blank"> website</a> for more information about this promo.',
-    altText: "jake-inez-promo",
+    altText: "baby-doge-promo",
   },
 };

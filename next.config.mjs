@@ -15,8 +15,8 @@ const nextConfig = {
       },
       // {
       //   protocol: "https",
-      //   hostname: "ipfs.io",
-      //   port: "",
+      //   hostname:
+      //     "ipfs://bafybeidopy3ixbzmdihpw3cps5octclnpu5ewrkxuk7s4zzybnv5vrrgp4/1",
       //   pathname: "/**",
       // },
       // {

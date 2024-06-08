@@ -64,7 +64,7 @@ export default function UserDashboardPage() {
     dispatch(addCollection(updatedNFTForListing as CollectionsProps));
   };
 
-  const { data, ownerMetadata, name, contractAddress } = NFTData[0];
+  const { data, contractAddress } = NFTData[0];
 
   return (
     <div className="flex flex-col w-full">

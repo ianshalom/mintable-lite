@@ -10,7 +10,7 @@ import { useAppDispatch } from "../lib/hooks";
 import { saveUserNFTData } from "../lib/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
-
+import { usePathname } from "next/navigation";
 export default function Modal({
   setShowModal,
 }: {
@@ -21,6 +21,7 @@ export default function Modal({
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const pathname = usePathname();
 
   const fetchDataHandler = async (info: ContractInfoForUserModeProps) => {
     const response = await getNftDataOfUser(info);
@@ -28,7 +29,7 @@ export default function Modal({
     setShowModal(false);
 
     dispatch(saveUserNFTData(nftData));
-    // router.push("/dashboard");
+    if (!pathname.includes("/assets")) router.push("/dashboard");
   };
 
   return (
@@ -79,7 +80,7 @@ export default function Modal({
                           fetchDataHandler(info);
                         }}
                       >
-                        {isLoading ? "Loading..." : `Connect to ${info.name}`}
+                        Connect to {info.name}
                       </button>
                     );
                   })}

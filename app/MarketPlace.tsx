@@ -22,7 +22,6 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
       dispatch(saveCollections(nftData));
     }
   }, [nftData, dispatch, uniqueNFTFromCollection, nftCollectionsByOwner]);
-
   if (!nftData || !uniqueNFTFromCollection || !nftCollectionsByOwner)
     return <LoadingComponent text="Loading..." />;
   return (

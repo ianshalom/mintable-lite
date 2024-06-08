@@ -52,7 +52,6 @@ export const formatNFTResponse = (
       data: array,
       contractAddress: array[0].contractAddress,
       metadata: userMetadata,
-      id: collection.id,
       promoData: collection?.promoData,
       slug: array[0].slug,
     };
