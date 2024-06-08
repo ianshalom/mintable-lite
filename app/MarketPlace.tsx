@@ -15,8 +15,9 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
   const uniqueNFTFromCollection = useAppSelector(useSelectNFTOfEachCollection);
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
+
   useEffect(() => {
-    // if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
+    if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
     if (nftData) {
       dispatch(saveCollections(nftData));
     }
@@ -37,7 +38,7 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
         {nftCollectionsByOwner.map((collection) => (
           <NFTRowDisplay
             key={collection.contractAddress}
-            slug={collection.id}
+            slug={collection.slug}
             header={collection.name}
             nftData={collection.data}
           />

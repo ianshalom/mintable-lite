@@ -65,7 +65,16 @@ export const getNFTMetaData = async (
   contractAddress: string,
   tokenId: string
 ) => {
-  const baseURLNFTMetadata = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTMetadata?contractAddress=${contractAddress}&tokenId=${tokenId}`;
-  const response = await axios.get(baseURLNFTMetadata);
+  const url = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTMetadata?contractAddress=${contractAddress}&tokenId=${tokenId}`;
+  const response = await axios.get(url);
   return response.data.metadata;
+};
+
+export const getNFTCollectionBySlug = async (slug: string) => {
+  const url = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getCollectionMetadata?collectionSlug=${slug}`;
+  const response = await axios
+    .get(url)
+    .then()
+    .catch((err) => console.log(err));
+  return response?.data;
 };

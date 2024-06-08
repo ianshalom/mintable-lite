@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../lib/hooks";
 import {
-  useSelectNFTInfoById,
   useSelectCollectionByNFTContractAddress,
   useSelectNFTMetaAndPromoData,
 } from "../lib/features/collections/collectionsSlice";
@@ -16,6 +15,7 @@ import { useSession } from "next-auth/react";
 import { useAccount } from "wagmi";
 import PurchaseNFTModal from "./PurchaseNFTModal";
 import { NFTMetadataProps } from "@/app/lib/interfaces/collections.interface";
+import { FaTwitter } from "react-icons/fa";
 
 export default function NFTDetailsPage({
   id,
@@ -49,13 +49,6 @@ export default function NFTDetailsPage({
     if (address || session.data) return setError("");
   }, [session.data, address]);
 
-  const nftData = useAppSelector(
-    useSelectNFTInfoById({
-      payload: id,
-      type: "useSelectNFTInfoById",
-    })
-  );
-
   const additionalNFTData = useAppSelector(
     useSelectNFTMetaAndPromoData({
       payload: { contractAddress, id },
@@ -65,7 +58,7 @@ export default function NFTDetailsPage({
 
   const collectionDataByOwner = useAppSelector(
     useSelectCollectionByNFTContractAddress({
-      payload: id,
+      payload: contractAddress,
       type: "useSelectCollectionByNFTContractAddress",
     })
   );
@@ -74,7 +67,9 @@ export default function NFTDetailsPage({
     return <LoadingComponent text="Loading..." />;
 
   const {
+    owner,
     price,
+    slug,
     lastUpdated,
     tokenType,
     description: promoDescription,
@@ -82,6 +77,7 @@ export default function NFTDetailsPage({
     imageUrl,
     altText,
     collectionName,
+    twitterUsername,
   } = additionalNFTData;
 
   return (
@@ -96,9 +92,15 @@ export default function NFTDetailsPage({
             <p className="mb-4">
               By{" "}
               <span className="underline text-blue-400">
-                <Link href={`/collections/${collectionDataByOwner.id}`}>
-                  {created_by}
-                </Link>
+                <Link href={`/collections/${slug}`}>{owner}</Link>
+              </span>
+              <span className="my-4">
+                <a
+                  href={`https://twitter.com/${twitterUsername}`}
+                  target="_blank"
+                >
+                  <FaTwitter size={20} />
+                </a>
               </span>
             </p>
             <i>{description}</i>
@@ -160,7 +162,7 @@ export default function NFTDetailsPage({
       <div className="py-8">
         <NFTRowDisplay
           key={collectionDataByOwner.id}
-          slug={collectionDataByOwner.id}
+          slug={slug}
           header="More from this collection"
           nftData={collectionDataByOwner.data}
         />

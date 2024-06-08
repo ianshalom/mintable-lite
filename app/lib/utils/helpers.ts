@@ -34,7 +34,7 @@ export const formatNFTResponse = (
         price:
           Math.floor(Math.random() * (5 * 100 - 1 * 100) + 1 * 100) / (1 * 100),
         owner: nft.contractMetadata?.name || nft.metadata?.created_by,
-        slug: collection.id,
+        slug: nft.contractMetadata?.openSea.collectionSlug,
       };
       return obj;
     });
@@ -54,6 +54,7 @@ export const formatNFTResponse = (
       metadata: userMetadata,
       id: collection.id,
       promoData: collection?.promoData,
+      slug: array[0].slug,
     };
   });
   return data;

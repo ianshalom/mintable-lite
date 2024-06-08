@@ -44,7 +44,7 @@ export const useSelectAllCollectionsData = (state: RootState) =>
 export const useSelectCollectionByNFTContractAddress =
   (action: PayloadAction<string>) => (state: RootState) => {
     const data = state.collections.data?.filter((data) =>
-      data.data.find((nft) => nft.id === action.payload)
+      data.data.find((nft) => nft.contractAddress === action.payload)
     )[0];
 
     return data;
@@ -60,20 +60,21 @@ export const useSelectNFTMetaAndPromoData =
     if (!data?.length) return null;
 
     const filteredNft = data[0].data.find((data) => data.id === id);
-
     return {
       ...data[0].metadata,
       ...data[0].promoData,
       price: filteredNft?.price,
       lastUpdated: filteredNft?.lastUpdated,
       tokenType: filteredNft?.tokenType,
+      owner: filteredNft?.owner,
+      slug: filteredNft?.slug,
     };
   };
 
 export const useSelectCollectionByOwnerId =
   (action: PayloadAction<string>) => (state: RootState) => {
     const data = state.collections.data?.filter(
-      (data) => data.id === action.payload
+      (data) => data.slug === action.payload
     )[0];
 
     return data;

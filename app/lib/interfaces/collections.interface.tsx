@@ -45,6 +45,7 @@ export interface CollectionsProps {
   contractAddress: string;
   metadata: OwnerMetadataProps;
   data: NFTDataProps[];
+  slug: string;
   id: string;
   promoData?: PromoDataProps;
 }
@@ -63,4 +64,13 @@ export interface NFTMetadataProps {
   description: string;
   attributes?: [{ value: string; trait_type: string }];
   created_by: string;
+}
+
+export interface NFTCollectionProps {
+  name: string;
+  slug: string;
+  bannerImageUrl: string;
+  floorPrice?: {};
+  description: string;
+  twitterUsername: string;
 }
