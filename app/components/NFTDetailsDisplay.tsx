@@ -78,6 +78,7 @@ export default function NFTDetailsPage({
     altText,
     collectionName,
     twitterUsername,
+    externalUrl,
   } = additionalNFTData;
 
   return (
@@ -145,7 +146,20 @@ export default function NFTDetailsPage({
               <p className="font-bold text-red-400 text-lg">Special offer!</p>
               <p>{promoDescription}</p>
             </div>
-            <p className="text-sm mb-4">{cta && parse(cta)}</p>
+            {externalUrl && (
+              <p className="text-sm my-4">
+                Visit our
+                <a
+                  href={externalUrl}
+                  className="underline text-blue-400"
+                  target="_blank"
+                >
+                  {" "}
+                  website
+                </a>{" "}
+                for more information about this promo.
+              </p>
+            )}
           </div>
           <div className="h-full w-1/2 flex items-center">
             <Image

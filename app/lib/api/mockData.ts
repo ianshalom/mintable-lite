@@ -1,17 +1,17 @@
 export const PROMO_MOCK_DATA = {
-  JAKE_INEZ: {
-    description: "Free book giveaway. Buy an NFT from my collection to claim!",
+  CRYPTOADZ: {
+    description:
+      "Get 5% off your next purchase if you purchase an NFT from us now. Offer ends at midnight!",
     imageUrl:
-      "https://images.squarespace-cdn.com/content/v1/6311513fbb74eb34c7645b4f/1711762169835-7WSYQMI3N6RB4YCUNO7P/Book+cover+hi+res.jpg?format=750w",
-    cta: 'Visit <a href="https://www.jakeinez.net/books/p/zephyr" className="underline text-blue-400" target="_blank">my website</a> for more information about my book.',
-    altText: "jake-inez-promo",
+      "https://nftnow.com/wp-content/uploads/2021/10/cryptoadz-inline-cr-gremplin-10262021-700x700.jpg",
+    altText: "cryptoadz-promo",
   },
   SCHIZO_POSTER: {
     description:
       "Free SchizoPoster giveaway. Buy an NFT from our collection to claim a free poster!",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmBpiT949kMTsnYVC1NkFL7_wKCvzox_8efg&s",
-    cta: 'Visit our <a href="https://twitter.com/SCHIZO_POSTERS" className="underline text-blue-400" target="_blank">twitter</a> for more information about SchizoPosters.',
+
     altText: "schizo-poster-promo",
   },
   BABY_DOGE: {
@@ -19,8 +19,22 @@ export const PROMO_MOCK_DATA = {
       "Purchase an NFT from us and stand a chance to become one of the 10 lucky winners to win $500 USDT",
     imageUrl:
       "https://support.bitmart.com/hc/article_attachments/15699070890011",
-    cta: 'Visit our<a href="https://babydogenft.com/" className="underline text-blue-400" target="_blank"> website</a> for more information about this promo.',
+
     altText: "baby-doge-promo",
+  },
+  WHERE_MY_VANS_GO: {
+    description:
+      "Purchase an NFT from us and win a free custom pair of vans shoes.",
+    imageUrl:
+      "https://i.etsystatic.com/20850599/r/il/4dd0f6/3466082094/il_570xN.3466082094_cwva.jpg",
+
+    altText: "where-my-vans-go-promo",
+  },
+  TERRAFORM_BY_MATHCASTLES: {
+    description: "Purchase an NFT from us and win a free Terraforms poster.",
+    imageUrl: "https://miro.medium.com/v2/resize:fit:1228/0*JOnU_9VGiTb80QFE",
+
+    altText: "terraforms-by-mathcastles-promo",
   },
 };
 
@@ -51,14 +65,14 @@ export const MINTABLE_LITE_MARKETPLACE_ADDRESSES = [
   },
   {
     url: whereMyVansGoUrl,
-    promoData: PROMO_MOCK_DATA.BABY_DOGE,
+    promoData: PROMO_MOCK_DATA.WHERE_MY_VANS_GO,
   },
   {
     url: terraformsByMathcastlesUrl,
-    promoData: PROMO_MOCK_DATA.BABY_DOGE,
+    promoData: PROMO_MOCK_DATA.TERRAFORM_BY_MATHCASTLES,
   },
   {
     url: crypToadzUrl,
-    promoData: PROMO_MOCK_DATA.BABY_DOGE,
+    promoData: PROMO_MOCK_DATA.CRYPTOADZ,
   },
 ];
