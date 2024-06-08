@@ -10,19 +10,26 @@ import {
   useSelectAllCollectionsData,
 } from "./lib/features/collections/collectionsSlice";
 import LoadingComponent from "./components/LoadingComponent";
+import { useSession } from "next-auth/react";
 
 export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
   const uniqueNFTFromCollection = useAppSelector(useSelectNFTOfEachCollection);
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
 
+  const { status } = useSession();
   useEffect(() => {
     if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
     if (nftData) {
       dispatch(saveCollections(nftData));
     }
   }, [nftData, dispatch, uniqueNFTFromCollection, nftCollectionsByOwner]);
-  if (!nftData || !uniqueNFTFromCollection || !nftCollectionsByOwner)
+  if (
+    !nftData ||
+    !uniqueNFTFromCollection ||
+    !nftCollectionsByOwner ||
+    status === "loading"
+  )
     return <LoadingComponent text="Loading..." />;
   return (
     <div className="w-full h-full">
