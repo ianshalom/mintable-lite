@@ -50,6 +50,26 @@ export const useSelectCollectionByNFTContractAddress =
     return data;
   };
 
+export const useSelectNFTMetaAndPromoData =
+  (action: PayloadAction<{ contractAddress: string; id: string }>) =>
+  (state: RootState) => {
+    const { contractAddress, id } = action.payload;
+    const data = state.collections.data?.filter(
+      (collection) => collection.contractAddress === contractAddress
+    );
+    if (!data?.length) return null;
+
+    const filteredNft = data[0].data.find((data) => data.id === id);
+
+    return {
+      ...data[0].metadata,
+      ...data[0].promoData,
+      price: filteredNft?.price,
+      lastUpdated: filteredNft?.lastUpdated,
+      tokenType: filteredNft?.tokenType,
+    };
+  };
+
 export const useSelectCollectionByOwnerId =
   (action: PayloadAction<string>) => (state: RootState) => {
     const data = state.collections.data?.filter(

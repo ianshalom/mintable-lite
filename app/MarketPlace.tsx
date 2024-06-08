@@ -15,9 +15,8 @@ export default function MarketPlace({ nftData }: { nftData: any }) {
   const dispatch = useAppDispatch();
   const uniqueNFTFromCollection = useAppSelector(useSelectNFTOfEachCollection);
   const nftCollectionsByOwner = useAppSelector(useSelectAllCollectionsData);
-
   useEffect(() => {
-    if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
+    // if (uniqueNFTFromCollection && nftCollectionsByOwner) return;
     if (nftData) {
       dispatch(saveCollections(nftData));
     }

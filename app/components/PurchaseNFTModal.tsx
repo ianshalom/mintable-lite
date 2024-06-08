@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 
-import { NFTDataProps } from "@/app/lib/interfaces/collections.interface";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 import { useAppSelector } from "../lib/hooks";
@@ -10,17 +9,24 @@ import { useSelectUserNFTData } from "../lib/features/user/userSlice";
 
 export default function PurchaseNFTModal({
   setShowModal,
-  selectedNFT,
+  name,
+  price,
+  createdBy,
+  image,
+  collectionName,
 }: {
   setShowModal: (status: boolean) => void;
-  selectedNFT?: NFTDataProps | null;
+  name: string;
+  price?: number;
+  collectionName: string;
+  createdBy: string;
+  image: string;
 }) {
   const [error, setError] = useState("");
 
   const userNFTData = useAppSelector(useSelectUserNFTData);
 
-  if (!selectedNFT) return;
-  const { name, price, owner, image, collectionName } = selectedNFT;
+  if (!price) return;
 
   return (
     <>
@@ -49,7 +55,7 @@ export default function PurchaseNFTModal({
                     <span className="text-blue-400 font-bold">{price} ETH</span>
                   </p>
                   <p className="text-md mb-2 font-bold">
-                    <span className="text-blue-400 font-bold">{owner}</span>
+                    <span className="text-blue-400 font-bold">{createdBy}</span>
                   </p>
                   <p className="text-md mb-2 font-bold">
                     <span className="text-blue-400 font-bold">
@@ -59,7 +65,7 @@ export default function PurchaseNFTModal({
                 </div>
               </div>
               <Image
-                alt={`${owner}-image`}
+                alt={`${createdBy}-image`}
                 src={image}
                 width={100}
                 height={100}

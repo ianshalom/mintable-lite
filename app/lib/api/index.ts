@@ -5,7 +5,6 @@ import { ContractInfoForUserModeProps } from "../interfaces/collections.interfac
 const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
 // Alchemy URL
 const baseURL = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTsForCollection`;
-
 // Get contract addresses of multiple nft owners for generating real nfts
 const jakeInezAddress = "0x7b0500fdc298e7f3a26d4cfab87606779680b7db";
 const schizoPosterAddress = "0xbfe47d6d4090940d1c7a0066b63d23875e3e2ac5";
@@ -51,7 +50,6 @@ export const getNftData = async () => {
       data: (await axios.get(url)).data.nfts,
     }))
   );
-
   return results;
 };
 
@@ -61,4 +59,13 @@ export const getNftDataOfUser = async (info: ContractInfoForUserModeProps) => {
   const response = await axios.get(url);
   const nftData = [{ data: response.data.nfts, id, name, contractAddress }];
   return nftData;
+};
+
+export const getNFTMetaData = async (
+  contractAddress: string,
+  tokenId: string
+) => {
+  const baseURLNFTMetadata = `https://eth-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTMetadata?contractAddress=${contractAddress}&tokenId=${tokenId}`;
+  const response = await axios.get(baseURLNFTMetadata);
+  return response.data.metadata;
 };

@@ -2,7 +2,6 @@ import {
   NFTDataProps,
   TransactionStatusProps,
 } from "../interfaces/collections.interface";
-import { v4 as uuidv4 } from "uuid";
 
 export const shuffleArrayFunc = (array: NFTDataProps[]) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -25,7 +24,7 @@ export const formatNFTResponse = (
         bannerImageUrl: nft.contractMetadata?.openSea.bannerImageUrl,
         externalUrl: nft.metadata?.external_url,
         twitterUsername: nft.contractMetadata?.openSea.twitterUsername,
-        id: uuidv4(),
+        id: nft.id.tokenId,
         lastUpdated: nft.timeLastUpdated,
         tokenType: nft.contractMetadata.tokenType,
         name: nft.metadata?.name,
@@ -52,7 +51,7 @@ export const formatNFTResponse = (
       name: array[0].owner,
       data: array,
       contractAddress: array[0].contractAddress,
-      ownerMetadata: userMetadata,
+      metadata: userMetadata,
       id: collection.id,
       promoData: collection?.promoData,
     };
