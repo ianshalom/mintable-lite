@@ -1,6 +1,6 @@
 export default function LoadingComponent({ text }: { text: string }) {
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center p-6">
+    <div className="w-full h-screen flex flex-col justify-center items-center p-6 text-lg font-bold">
       <p>{text}</p>
       <div className="flex gap-1">
         <div
