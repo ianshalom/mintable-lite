@@ -14,7 +14,7 @@ export default function NFTCard({
   onClick?: () => void;
 }) {
   const { name, price, owner, image } = collection;
-
+  console.log("COLLETION: ", collection);
   return (
     <div
       className="mr-2 mb-8 rounded-xl shadow-lg hover:cursor-pointer hover:shadow-xl"
@@ -31,7 +31,9 @@ export default function NFTCard({
         </div>
         <div className="p-4 flex flex-col justify-between">
           <div className="h-[100px]">
-            <p className="font-bold text-sm mb-2">{name}</p>
+            <p className="font-bold text-sm mb-2">
+              {displayCollection ? collection.collectionName : name}
+            </p>
             <p className="text-xs text-gray-400 mb-4">By {owner}</p>
           </div>
           {!hidePrice && !displayCollection && (
