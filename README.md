@@ -9,12 +9,12 @@ Since there is no backend, I will be treating the Redux store as my DB to handle
 
 # Marketplace
 
-This project uses the Alchemy API to fetch NFTs by contract addresses. I have picked a couple of contract addresses from OpenSea to populate the marketplace with real NFTs (GET: /getNFTsForCollection).
-The marketplace in Mintable Lite is categorised by Collections/Owners. Clicking on any NFT in the collections category wil take you to the collections page and clicking on any NFT from the owner category will take you directly to the NFT details page (/assets/tokenId). The app also uses NextAuth with GitHub OAuth provider for a simple log in authentication.
+This project uses the Alchemy API to fetch NFTs by contract address. I have picked a couple of contract addresses from OpenSea to populate the marketplace with real NFTs (GET: /getNFTsForCollection).
+The marketplace in Mintable Lite is categorised by Collections/Brands/Owners. Clicking on any NFT in the collections category will take you to the collections page and clicking on any NFT from the owner category will take you directly to the NFT details page (/assets/tokenId). The app also uses NextAuth with GitHub OAuth provider for a simple log in authentication.
 
 # Dashboard/Digital Wallet
 
-You will first need to log in before you can connect to your Metamask wallet. Since I do not own any NFTs, I will be prompted to generate some NFTs after I have successfully connected to my Metamask wallet from existing owners (GET: /getNFTsForCollection) to treat as my own and have them populated in my digital wallet (/dashboard). I can list NFTs on the market place by clicking on any NFT in my wallet and setting a price to it. It will be displayed in the home/marketplace page at the very bottom.
+You will first need to log in before you can connect to your Metamask wallet. Since I do not own any NFTs, I will be prompted to generate some NFTs after I have successfully connected to my Metamask wallet from existing owners (GET: /getNFTsForCollection) to treat as my own and have them populated in my digital wallet (/dashboard). I can list NFTs on the market place by clicking on any NFT in my wallet and setting a price to it. It will be displayed in the home/marketplace page at the very bottom. Since you can list NFTs as a logged in user to promote your brand, given more time, I would've liked to add a form to allow for more customisation, like being able to add promotions etc. Currently, I am hardcoding the promotional data for existing brands in the martketplace.
 
 # Collections page
 
@@ -22,7 +22,7 @@ Each owner on the market place will have their own collection page (including yo
 
 # NFT Details/assets page
 
-The assets page will list the relevant NFT metadata related to the selected NFT (GET: /getNFTMetadata) along with other related NFTs from the same collection at the bottom. There is also a buy button but it doesn't come with the actual buy functionality.
+The assets page will list the relevant NFT metadata related to the selected NFT (GET: /getNFTMetadata) along with other related NFTs from the same collection at the bottom. I am also mapping mock promotional data for each brand and displaying it in this page. There is also a buy button but it doesn't come with the actual buy functionality.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
