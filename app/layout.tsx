@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Quantico } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import Providers from "./Providers";
@@ -7,7 +7,8 @@ import SessionProvider from "./SessionProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/options";
 import ClientLayoutWrapper from "./ClientLayoutWrapper";
-const inter = Inter({ subsets: ["latin"] });
+
+const quantico = Quantico({ weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Mintable Lite",
@@ -24,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={quantico.className}>
         <SessionProvider session={session as any}>
           <Providers>
             <StoreProvider>
