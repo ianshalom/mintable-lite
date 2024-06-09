@@ -25,6 +25,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/image/favicon.ico" sizes="any" />
+      </head>
       <body className={quantico.className}>
         <SessionProvider session={session as any}>
           <Providers>
