@@ -20,7 +20,7 @@ export default function TopNav() {
   const signOutHandler = () => {
     persistor.purge();
     disconnect();
-    signOut();
+    signOut({ callbackUrl: "/" });
   };
 
   return (

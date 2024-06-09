@@ -20,7 +20,11 @@ export default function NFTRowDisplay({
         ? `/collections/${collection.slug}`
         : `/assets//${collection.contractAddress}/${collection.id}`;
       return (
-        <Link key={collection.name} href={hrefString}>
+        <Link
+          key={collection.name}
+          href={hrefString}
+          className="w-1/5 height-4/5"
+        >
           <NFTCard
             collection={collection}
             displayCollection={displayCollection}
@@ -31,19 +35,17 @@ export default function NFTRowDisplay({
     .slice(0, 5);
 
   return (
-    <div>
-      <div className="flex flex-col w-full">
-        <div className="flex justify-between items-center font-bold mb-4">
-          <p className="text-xl">{header}</p>
-          {!displayCollection && (
-            <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
-              <Link href={`/collections/${slug}`}>See more</Link>
-            </span>
-          )}
-        </div>
-        <div className="h-full flex justify-between">
-          {mappedNfts.length && mappedNfts}
-        </div>
+    <div className="flex flex-col w-full">
+      <div className="flex justify-between items-center font-bold mb-4">
+        <p className="text-xl">{header}</p>
+        {!displayCollection && (
+          <span className="bg-gray-300 px-4 py-2 rounded-xl text-lg font-bold mb-4 hover:bg-gray-200 hover:cursor-pointer">
+            <Link href={`/collections/${slug}`}>See more</Link>
+          </span>
+        )}
+      </div>
+      <div className="flex justify-between">
+        {mappedNfts.length && mappedNfts}
       </div>
     </div>
   );

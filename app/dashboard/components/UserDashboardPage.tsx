@@ -13,7 +13,7 @@ import NFTCard from "@/app/components/NFTCard";
 import ListNFTModal from "./ListNFTModal";
 import { NFTDataProps } from "@/app/lib/interfaces/collections.interface";
 import { CollectionsProps } from "@/app/lib/interfaces/collections.interface";
-
+import NFTRowDisplay from "@/app/components/NFTRowDisplay";
 export default function UserDashboardPage() {
   const [showModal, setShowModal] = useState(false);
 
@@ -96,15 +96,15 @@ export default function UserDashboardPage() {
       </div>
       <div className="h-full flex flex-wrap justify-between">
         {data.map((collection) => (
-          <span
+          <NFTCard
             key={collection.name}
             onClick={() => {
               setSelectedNFT(collection);
               setShowModal(true);
             }}
-          >
-            <NFTCard collection={collection} hidePrice />
-          </span>
+            collection={collection}
+            hidePrice
+          />
         ))}
         {showModal ? (
           <ListNFTModal

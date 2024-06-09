@@ -6,7 +6,7 @@ export interface NFTDataProps {
   collectionDescription: string;
   collectionName: string;
   bannerImageUrl: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   tokenType: string;
   twitterUsername: string;
   externalUrl: string;

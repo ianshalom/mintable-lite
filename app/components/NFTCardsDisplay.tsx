@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import NFTCard from "./NFTCard";
 import { useSelectCollectionByOwnerId } from "../lib/features/collections/collectionsSlice";
 import { useAppSelector } from "../lib/hooks";
@@ -30,43 +30,53 @@ export default function NFTCardsDisplay({
   const { description, name, twitterUsername, bannerImageUrl } = collectionData;
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="w-full h-96 relative mb-8">
-        <Image
-          alt={`${name}-banner`}
-          src={bannerImageUrl}
-          fill
-          objectFit="cover"
-          className="rounded-md"
-          quality={100}
-        />
-      </div>
-      <div className="flex">
-        <div className="w-1/2 h-32">
-          <p className="truncate ... mb-4">{description}</p>
-          <p className="mb-4">
-            Items: <span className="font-bold">{data.length}</span>
-          </p>
-          <span>
-            <a href={`https://twitter.com/${twitterUsername}`} target="_blank">
-              <FaTwitter size={20} />
-            </a>
-          </span>
+    <div className="flex flex-col">
+      <div className="mb-10">
+        <div className="h-96 w-full relative mb-8">
+          <Image
+            alt={`${name}-banner`}
+            src={bannerImageUrl}
+            fill
+            className="rounded-md"
+            quality={100}
+          />
+        </div>
+        <div className="flex">
+          <div className="">
+            <div className="flex justify-between">
+              <p className={`mb-4 text-wrap w-2/3`}>{description}</p>
+              <div className="flex px-2 justify-between">
+                <p className="mr-4 ">
+                  Items: <span className="font-bold">{data.length}</span>
+                </p>
+                <span>
+                  <a
+                    href={`https://twitter.com/${twitterUsername}`}
+                    target="_blank"
+                  >
+                    <FaTwitter size={20} />
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div className="w-1/2"></div>
+          </div>
         </div>
       </div>
-
-      <div className="font-bold mb-8">
-        <p className="text-4xl">{name}</p>
-      </div>
-      <div className="h-full flex flex-wrap justify-between">
-        {data.map((collection) => (
-          <Link
-            key={collection.name}
-            href={`/assets/${collection.contractAddress}/${collection.id}`}
-          >
-            <NFTCard collection={collection} />
-          </Link>
-        ))}
+      <div>
+        <div className="font-bold mb-8">
+          <p className="text-4xl">{name}</p>
+        </div>
+        <div className="h-full flex flex-wrap justify-between">
+          {data.map((collection) => (
+            <Link
+              key={collection.name}
+              href={`/assets/${collection.contractAddress}/${collection.id}`}
+            >
+              <NFTCard collection={collection} />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

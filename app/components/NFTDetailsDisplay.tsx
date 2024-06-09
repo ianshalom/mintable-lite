@@ -10,12 +10,12 @@ import Image from "next/image";
 import LoadingComponent from "./LoadingComponent";
 import NFTRowDisplay from "./NFTRowDisplay";
 import Link from "next/link";
-import parse from "html-react-parser";
 import { useSession } from "next-auth/react";
 import { useAccount } from "wagmi";
 import PurchaseNFTModal from "./PurchaseNFTModal";
 import { NFTMetadataProps } from "@/app/lib/interfaces/collections.interface";
 import { FaTwitter } from "react-icons/fa";
+import { formatDate } from "../lib/utils/helpers";
 
 export default function NFTDetailsPage({
   id,
@@ -95,16 +95,16 @@ export default function NFTDetailsPage({
               <span className="underline text-blue-400">
                 <Link href={`/collections/${slug}`}>{owner}</Link>
               </span>
-              <span className="my-4">
-                <a
-                  href={`https://twitter.com/${twitterUsername}`}
-                  target="_blank"
-                >
-                  <FaTwitter size={20} />
-                </a>
-              </span>
             </p>
-            <i>{description}</i>
+            <span className="py-4">
+              <a
+                href={`https://twitter.com/${twitterUsername}`}
+                target="_blank"
+              >
+                <FaTwitter size={20} />
+              </a>
+            </span>
+            <p className="py-2 italic">{description}</p>
           </div>
           <div>
             <p className="font-bold text-lg">
@@ -131,37 +131,39 @@ export default function NFTDetailsPage({
               <p className="text-sm">Token Standard</p>
               <p className="text-sm">Last Updated</p>
             </div>
-            <div className="">
-              <p className="text-sm">{contractAddress}</p>
-              <p className="text-sm">{id}</p>
-              <p className="text-sm">{tokenType}</p>
-              <p className="text-sm">{lastUpdated}</p>
+            <div>
+              <p className="text-sm text-gray-400">{contractAddress}</p>
+              <p className="text-sm text-gray-400">{id}</p>
+              <p className="text-sm text-gray-400">{tokenType}</p>
+              <p className="text-sm text-gray-400">{formatDate(lastUpdated)}</p>
             </div>
           </div>
         </div>
 
-        <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex">
+        <div className=" bg-gray-100 rounded-xl p-4 mb-4 flex justify-between items-center">
           <div className="w-1/2 mr-14 flex flex-col justify-between">
             <div>
-              <p className="font-bold text-red-400 text-lg">Special offer!</p>
-              <p>{promoDescription}</p>
-            </div>
-            {externalUrl && (
-              <p className="text-sm my-4">
-                Visit our
-                <a
-                  href={externalUrl}
-                  className="underline text-blue-400"
-                  target="_blank"
-                >
-                  {" "}
-                  website
-                </a>{" "}
-                for more information about this promo.
+              <p className="font-bold text-red-400 text-lg mb-4">
+                Special offer!
               </p>
-            )}
+              <p>{promoDescription}</p>
+              {externalUrl && (
+                <p className="text-sm my-4">
+                  Visit our
+                  <a
+                    href={externalUrl}
+                    className="underline text-blue-400"
+                    target="_blank"
+                  >
+                    {" "}
+                    website
+                  </a>{" "}
+                  for more information about this promo.
+                </p>
+              )}
+            </div>
           </div>
-          <div className="h-full w-1/2 flex items-center">
+          <div className="h-full flex items-center">
             <Image
               alt={altText ?? ""}
               src={imageUrl ?? ""}

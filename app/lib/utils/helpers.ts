@@ -58,3 +58,27 @@ export const formatNFTResponse = (
   });
   return data;
 };
+
+export const formatDate = (dateString?: Date) => {
+  if (!dateString) return;
+  let date = new Date(dateString),
+    day = date.getDate(),
+    month = date.getMonth(),
+    year = date.getFullYear(),
+    months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+  return months[month] + " " + year;
+};
